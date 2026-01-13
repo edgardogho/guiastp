@@ -1,0 +1,1255 @@
+\documentclass{article}
+\usepackage[table]{xcolor}
+\usepackage[T1]{fontenc}
+\usepackage{tgschola}
+\usepackage[a4paper, total={6in, 8in}, margin=2cm]{geometry}
+\usepackage{lipsum}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\setlength{\headheight}{48.2pt}
+\usepackage{boxedminipage}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{subfig}
+\usepackage{circuitikz}
+\usetikzlibrary{arrows}
+\usepackage[T1]{fontenc}
+\usepackage{tgbonum}
+\usepackage[most]{tcolorbox}
+\usepackage{textgreek}
+\usepackage{graphicx}
+\graphicspath{ {./} }
+\usepackage[T1]{fontenc}
+\usepackage{multicol}
+\usepackage{siunitx}
+\sisetup{output-decimal-marker = {,}} %para que use coma en vez de punto
+\usepackage[usestackEOL]{stackengine}
+\graphicspath{ {./imagenes/} }
+\pagestyle{fancy}
+\usepackage{enumitem}
+\usepackage[most]{tcolorbox}
+\usepackage[option ]{askmaps}
+\usepackage{circuitikz}
+\usepackage{float}
+\usepackage{adjustbox}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{tikz-timing}
+\usepackage{url}
+
+\definecolor{headergray}{RGB}{220,220,220}
+\usepackage{geometry}
+\usepackage{changepage}
+\usepackage{listings}
+\lstset{
+	basicstyle=\small\ttfamily,
+	columns=flexible,
+	breaklines=true
+}
+\usepackage{skull}
+\usepackage{makecell}
+
+%%Modificar los siguientes valores segun la materia/tp
+\newcommand{\Titulo}{Trabajo Práctico 1.2-1.3}
+\newcommand{\Subtitulo}{Semiconductores y tecnología }
+\newcommand{\SubtituloDos}{de circuitos integrados}
+\newcommand{\Version}{Versión 261C.01}
+\newcommand{\Carrera}{INGENIERÍA EN INFORMÁTICA}
+\newcommand{\Asignatura}{3631 - Fundamentos de sistemas embebidos}
+\newcommand{\Tema}{Semiconductores y tecnología de circuitos integrados}
+\newcommand{\Unidad}{1.2 - 1.3}
+\newcommand{\Objetivo}{Comprender los conceptos básicos de semiconductores y las características de las señales digitales en circuitos integrados}
+\newcommand{\TiempoResolucion}{1 semana}
+\newcommand{\Metodologia}{Ejercicios verificados en simuladores}
+\newcommand{\Entrega}{No obligatoria}
+
+
+\fancyhead[L]{\framebox(128,64){\includegraphics[scale=0.18]{diit}}}
+\fancyhead[C]{\framebox(224,64){\Longstack{\textbf{\Titulo}\\\textbf{\Subtitulo}\\\textbf{\SubtituloDos}\\Pág. \thepage\ de \pageref{LastPage}}}}
+\fancyhead[R]{\framebox(128,64){\includegraphics[scale=0.055]{logo}}}
+\renewcommand{\headrulewidth}{0.0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+
+
+\begin{document}
+	
+		\centering\LARGE{\textbf{\Version}}
+	\large
+	\\
+	\begin{center}
+		\begin{tabular}{|p{16cm}|} % 'l' for left-aligned, 'p' for paragraph with specified width
+			
+			\hline
+			\rule{0pt}{15pt}
+			\textbf{Carrera: \Carrera} \\
+			\hline
+			\rule{0pt}{15pt}
+			\textbf{Asignatura:}  \Asignatura \\
+			\hline
+			\rule{0pt}{15pt}
+			\textbf{Tema:}  \Tema \\
+			\hline
+			\rule{0pt}{15pt}
+			\textbf{Unidad:}  \Unidad \\
+			\hline
+			\rule{0pt}{15pt}
+			\textbf{Objetivo:} \Objetivo \\
+			\hline
+			\rule{0pt}{15pt}
+			\textbf{Competencias a desarrollar:} 
+			\begin{itemize}
+				\item Concepción, diseño y desarrollo de proyectos de ingeniería en informática.
+				\item Gestión, planificación, ejecución y control de proyectos de ingeniería en informática.
+				\item Utilización de técnicas y herramientas de aplicación en la ingeniería en informática.
+				\item Generación de desarrollos tecnológicos y/o innovaciones tecnológicas.
+				\item Desarrollo de una actitud profesional emprendedora.
+				\item Aprendizaje continuo
+				\item Actuación profesional ética y responsable.
+				\item Comunicación efectiva.
+				\item Desempeño en equipos de trabajo.
+				\item Identificación, formulación y resolución de problemas de ingeniería en informática
+			\end{itemize} \\
+			\hline
+			\rule{0pt}{15pt}
+			\textbf{Descripción de la actividad:} 
+			\begin{enumerate}
+				\item  Tiempo estimado de resolución: \TiempoResolucion
+				\item Metodología: \Metodologia
+				\item Forma de entrega: \Entrega
+				\item Metodología de corrección y feedback al alumno: Presencial y por Miel.
+			\end{enumerate} \\
+			\hline
+		\end{tabular}
+	\end{center}
+	
+	\clearpage
+	
+			%% Hacer que las tablas tengan un poco de padding
+	\def\arraystretch{1.2}
+	
+	\section*{B- Semiconductores}
+	\begin{adjustwidth}{-20pt}{-20pt}
+		\begin{tcolorbox}[enhanced,attach boxed title to top center={yshift=-3mm,yshifttext=-1mm},
+			colback=black!5!white,colframe=white!75!black,colbacktitle=red!80!black,
+			title= Diodo Ideal vs Diodo Real , fonttitle=\bfseries,
+			boxed title style={size=small,colframe=white,colback=black} ]
+			Dado que cada diodo tiene una curva que describe su funcionamiento, cada ejercicio indica si se utiliza un diodo real o un diodo ideal. Los ejercicios que se refieren al diodo ideal de 2V utilizan el siguiente subcircuito visto en la teoría. A continuación dejamos el texto del subcircuito para el simulador Falstad, que puede importarse en  File > Import From Text , y luego una vez importado File > Create Subcircuit para poder incluirlo en Draw > Subcircuit.
+			\begin{lstlisting}
+$ 1 0.000005 10.20027730826997 50 5 50 5e-11
+207 320 48 320 16 4 Anodo
+207 464 32 464 64 4 Catodo
+178 368 48 432 48 6 1 0.2 0.05000000004999653 0.05 1000000 0.02 20 0.015 0.005 1
+v 368 48 320 48 0 0 40 2 0 0 0.5
+R 368 80 336 80 0 0 40 2 0 0 0.5
+401 368 128 432 128 1 8\s15\s-15\s1000000\s4.661160346586257e-12\s2\s100000 2\s20\s10000000000\s2.5 1\s0
+x 278 178 538 181 4 24 Diodo\sIdeal\sSimulado\s2V
+w 432 80 432 128 0
+w 368 112 368 80 0
+w 368 144 320 144 0
+w 320 144 320 48 0
+w 464 32 432 32 0
+				\end{lstlisting}
+				\begin{tikzpicture}
+					% Paths, nodes and wires:
+					\node[op amp] at (7.083, 5.789){};
+					\node[spdt, yscale=-1] at (7, 8.5){};
+					\draw (5.095, 8.5) to[battery1, l={$2v$}] (5.75, 8.5);
+					\draw (6, 7.25) to[cute inductor] (7.75, 7.25);
+					\node[vcc](N1) at (5.5, 7.25){} node[anchor=east] at (N1.west){$2v$};
+					\node[circ] at (5.5, 7.25){};
+					\draw (6, 7.25) -- (5.5, 7.25);
+					\node[squarepole](N2) at (4.25, 8.5){} node[anchor=south] at (N2.north){$Anodo$};
+					\node[squarepole](N3) at (8.5, 8.5){} node[anchor=north] at (N3.south){$Catodo$};
+					\draw (7.595, 8.815) -| (8.5, 8.75) -| (8.5, 8.5);
+					\node[circ] at (4.5, 8.5){};
+					\draw (6.405, 8.5) -- (5.75, 8.5);
+					\node[shape=rectangle, draw, line width=1pt, dash pattern={on 4pt off 4pt}, minimum width=1.215cm, minimum height=1.965cm] at (6.875, 8){};
+					\draw (5.893, 6.279) -| (5.5, 7.25);
+					\draw (7.75, 7.25) -| (8.273, 5.789);
+					\draw (5.893, 5.299) -| (4.5, 8.5);
+					\node[shape=rectangle, minimum width=0.965cm, minimum height=0.965cm](N4) at (7.25, 5.75){} node[anchor=center] at (N4.text){$\geq ?$};
+					\draw (5.095, 8.5) -- (4.5, 8.5);
+					\draw (4.5, 8.5) -- (4.25, 8.5);
+				\end{tikzpicture}
+				\\ Recuerde que esto \textbf{NO ES UN DIODO} sino un subcircuito creado para "simular" un diodo ideal ya que el mismo no existe.
+		\end{tcolorbox}
+	\end{adjustwidth}
+	
+
+		\begin{enumerate}[label=\textbf{B.\arabic*},resume]	
+		\begin{minipage}{.75\textwidth} 
+			\item
+			\label{diodobasico}
+			Dado el siguiente circuito complete los valores que faltan en la tabla. El diodo $D1$ equivale al diodo ideal de 2V simulado. Considerando que comercialmente se consiguen resistores de $1/8W,1/4W,1/2W,1W,2W,5W$, indique el adecuado. \textit{Nota: Recuerde que este diodo no conduce hasta no esta polarizado en directa con al menos 2V de diferencia de potencial entre ánodo y cátodo, luego se comporta como una llave ideal.}  
+		\end{minipage}
+		\begin{minipage}{.90\textwidth}
+			\begin{tikzpicture}
+				% Paths, nodes and wires:
+				\node[circ] at (6, 8){};
+				\draw (4, 8.5) to[battery1, l_={$V1$}] (4, 7.5);
+				\node[plain crossing] at (3.75, 8.36){};
+				\draw (6, 8) to[american resistor, l={$R1$}] (6, 10);
+				\draw (6, 8) to[empty diode, l_={$D1$}] (6, 6);
+				\draw (4, 8.5) -| (4, 10) -- (6, 10);
+				\draw (6, 6) -- (4, 6) -| (4, 7.5);
+				\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](N1) at (6.375, 8){} node[anchor=center] at (N1.text){$Va$};
+				\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](N2) at (3.5, 9.5){} node[anchor=center] at (N2.text){$i1$};
+				\draw[-latex] (3.75, 9) -- (3.75, 10);
+			\end{tikzpicture}
+		\end{minipage}
+		\\
+		\begin{tabular}{|c|c|c|c|c|c|c|c|}
+			\hline
+			\rowcolor{headergray}
+			${V1 }$& ${R1}$& ${i1}$&$Va$&$V_{R1}$&$P_{R1}$&$D1$&$W_{res}$\\ \hline
+			$\SI{5}{\volt}$& $\SI{300}{\ohm}$& $\SI{10}{\milli\ampere}$& $\SI{2}{\volt}$&$\SI{3}{\volt}$&$\SI{30}{\milli\watt}$& $\SI{2}{\volt}$&$1/8W$ \\ \hline
+			$\SI{5}{\volt}$&&$\SI{20}{\milli\ampere}$&&&&$\SI{2}{\volt}$ & \\ \hline
+			$\SI{12}{\volt}$&&&&$\SI{10}{\volt}$&$\SI{200}{\milli\watt}$&$\SI{2}{\volt}$ & \\ \hline
+			& $\SI{21,8}{\kilo\ohm}$&&&$\SI{218}{\volt}$&&$\SI{2}{\volt}$ & \\ \hline
+			$\SI{1}{\volt}$&$\SI{2}{\ohm}$&&$\SI{1}{\volt}$&&&$\SI{2}{\volt}$& \\ \hline
+			
+		\end{tabular}
+		\\
+		\item Dado el circuito del punto \ref{diodobasico} el diodo $D1$ equivale al 1N4004 (diodo real). Encuentre los valores faltantes en la tabla. \textit{Nota: tenga en cuenta que al ser un diodo real, su tensión de umbral (D1) va a depender de la corriente que circula por el mismo, por ende no desprecie decimales para que los valores calculados se acerquen lo mas posible a la simulación.}
+		\\
+		\begin{tabular}{|c|c|c|c|c|c|c|c|}
+			\hline
+			\rowcolor{headergray}
+			${V1 }$& ${R1}$& ${i1}$&$Va$&$V_{R1}$&$P_{R1}$&$D1$&$W_{res}$\\ \hline
+			$\SI{5}{\volt}$& $\SI{300}{\ohm}$& $\SI{14,33}{\milli\ampere}$& $\SI{701,043}{\milli\volt}$&$\SI{4,299}{\volt}$&$\SI{61,603}{\milli\watt}$& $\SI{701,043}{\milli\volt}$&$1/8W$ \\ \hline
+			$\SI{5}{\volt}$&$\SI{150}{\ohm}$&&&&&$\SI{736,868}{\milli\volt}$& \\ \hline
+			$\SI{12}{\volt}$&$\SI{1,3}{\kilo\ohm}$&$\SI{8,713}{\milli\ampere}$&&&&& \\ \hline
+			$\SI{220}{\volt}$&$\SI{108,3}{\kilo\ohm}$&&&&&$\SI{600}{\milli\volt}$& \\ \hline
+			$\SI{20}{\volt}$&$\SI{10}{\ohm}$&&&&&$\SI{1}{\volt}$&$\skull$ \\ \hline
+			
+			
+		\end{tabular}
+		\\
+		\begin{minipage}{.75\textwidth} 
+			\item
+			\label{diodoarriba}
+			Dado el siguiente circuito complete los valores que faltan en la tabla. Utilice el diodo ideal simulado de 2V para el LED $D1$. Encuentre el valor comercial correcto para la resistencia. \textit{Nota: Si bien son los mismos elementos que los puntos anteriores el orden de los elementos va a generar distintos valores en $Va$} \\
+			\begin{tabular}{|c|c|c|c|c|c|c|c|}
+				\hline
+				\rowcolor{headergray}
+				${V1 }$& ${R1}$& ${i1}$&$Va$&$V_{R1}$&$P_{R1}$&$D1$&$W_{res}$\\ \hline
+				$\SI{5}{\volt}$& $\SI{150}{\ohm}$& $\SI{20}{\milli\ampere}$& $\SI{3}{\volt}$&$\SI{3}{\volt}$&$\SI{60}{\milli\watt}$& $\SI{2}{\volt}$&$1/8W$ \\ \hline
+				$\SI{5}{\volt}$&&$\SI{10}{\milli\ampere}$&&&&$\SI{2}{\volt}$& \\ \hline
+				&&&&	$\SI{10}{\volt}$&$\SI{200}{\milli\watt}$&$\SI{2}{\volt}$& \\ \hline
+				$\SI{220}{\volt}$&$\SI{10,9}{\kilo\ohm}$&&&&&$\SI{2}{\volt}$& \\ \hline
+				$\SI{1}{\volt}$&$\SI{300}{\ohm}$&&&&&$\SI{2}{\volt}$& \\ \hline
+				
+			\end{tabular}
+		\end{minipage}
+		\begin{minipage}{.2\textwidth}
+			\begin{tikzpicture}
+				% Paths, nodes and wires:
+				\node[circ] at (6.875, 7.5){};
+				\draw (6.875, 5.5) to[american resistor, l={$R1$}] (6.875, 7.5);
+				\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](N1) at (7.25, 7.5){} node[anchor=center] at (N1.text){$Va$};
+				\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](N2) at (6, 10){} node[anchor=center] at (N2.text){$i1$};
+				\draw[-latex] (5.375, 9.75) -- (6.375, 9.75);
+				\draw (6.875, 9.5) to[empty led, l_={$D1$}] (6.875, 7.5);
+				\node[vcc](N3) at (4.75, 9.5){} node[anchor=east] at (N3.west){$V1$};
+				\node[ground] at (6.875, 5.5){};
+				\draw (4.75, 9.5) -| (6.875, 9.5);
+				\node[plain crossing] at (4.5, 10.14){};
+			\end{tikzpicture}
+			\\
+		\end{minipage}
+		\\
+	
+		\end{enumerate}
+		
+			
+		
+	
+	
+		\begin{enumerate}[label=\textbf{B.\arabic*},resume]	
+		\item Utilizando el circuito del punto \ref{diodoarriba}, reemplace el diodo ideal por un diodo real (default-led en Falstad). Encuentre los valores que faltan en la tabla. 
+		\\
+		\begin{tabular}{|c|c|c|c|c|c|c|c|}
+			\hline
+			\rowcolor{headergray}
+			${V1 }$& ${R1}$& ${i1}$&$Va$&$V_{R1}$&$P_{R1}$&$D1$&$W_{res}$\\ \hline
+			$\SI{5}{\volt}$& $\SI{321}{\ohm}$& $\SI{10}{\milli\ampere}$& $\SI{3,215}{\volt}$&$\SI{3,215}{\volt}$&$\SI{32,2}{\milli\watt}$& $\SI{1,785}{\volt}$&$1/8W$ \\ \hline
+			$\SI{5}{\volt}$&&$\SI{20}{\milli\ampere}$&&&&$\SI{1,852}{\volt}$& \\ \hline
+			&&&&	$\SI{10,148}{\volt}$&$\SI{203}{\milli\watt}$&$\SI{1,852}{\volt}$& \\ \hline
+			$\SI{220}{\volt}$&$\SI{10,9}{\kilo\ohm}$&&&&&$\SI{1,852}{\volt}$& \\ \hline
+			$\SI{1}{\volt}$&$\SI{300}{\ohm}$&&&&&$\SI{999}{\milli\volt}$& \\ \hline
+			
+		\end{tabular}
+		
+		\begin{minipage}{.55\textwidth} 
+			\item
+			
+			Dado el siguiente circuito complete los valores que faltan en la tabla. Utilice el diodo ideal simulado de 2V para cada LED $Dx$. Para cada una de las resistencias encuentre la potencia. \\
+			
+		\end{minipage}
+		\begin{minipage}{.2\textwidth}
+		\begin{tikzpicture}
+			% Paths, nodes and wires:
+			\draw (3, 9) to[battery1, l_={$V1$}] (3, 8);
+			\node[plain crossing] at (2.75, 8.75){};
+			\draw (5, 10) to[american resistor, l_={$R1$}] (5, 8);
+			\draw (7, 10) to[american resistor, l_={$R2$}] (7, 8);
+			\draw (9, 10) to[american resistor, l_={$R3$}] (9, 8);
+			\draw[-latex] (5.5, 9.5) -- (5.5, 8.5);
+			\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm](N1) at (5.75, 9){} node[anchor=center] at (N1.text){$i1$};
+			\draw[-latex] (7.5, 9.5) -- (7.5, 8.5);
+			\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm](N2) at (7.75, 9){} node[anchor=center] at (N2.text){$i2$};
+			\draw[-latex] (9.5, 9.5) -- (9.5, 8.5);
+			\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm](N3) at (9.75, 9){} node[anchor=center] at (N3.text){$i3$};
+			\node[circ] at (5, 8){};
+			\node[circ] at (7, 8){};
+			\node[circ] at (9, 8){};
+			\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm](N4) at (5.5, 8){} node[anchor=center] at (N4.text){$Va$};
+			\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm](N5) at (7.5, 8){} node[anchor=center] at (N5.text){$Vb$};
+			\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm](N6) at (9.5, 8){} node[anchor=center] at (N6.text){$Vc$};
+			\draw (5, 7.75) to[empty led, l_={$D1$}] (5, 6.75);
+			\draw (7, 7.75) to[empty led, l_={$D2$}] (7, 6.75);
+			\draw (9, 7.75) to[empty led, l_={$D4$}] (9, 6.75);
+			\draw (7, 6.75) to[empty led, l_={$D3$}] (7, 5.75);
+			\draw (9, 6.75) to[empty led, l_={$D5$}] (9, 5.75);
+			\draw (9, 5.75) to[empty led, l_={$D6$}] (9, 4.75);
+			\node[circ] at (5, 4.5){};
+			\node[circ] at (7, 4.5){};
+			\draw (5, 7) -| (5, 4.5) |- (3, 4.5) -- (3, 8);
+			\draw (7, 4.5) |- (5, 4.5);
+			\draw (7, 6) -| (7, 4.5);
+			\draw (9, 5) |- (7, 4.5);
+			\node[circ] at (5, 10){};
+			\node[circ] at (7, 10){};
+			\draw (3, 9) -| (3, 10) -- (5, 10);
+			\draw (5, 10) -- (7, 10);
+			\draw (7, 10) -- (9, 10);
+			\draw[latex-] (3.25, 6.5) -- (3.25, 5.5);
+			\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm](N7) at (3.5, 6){} node[anchor=center] at (N7.text){$i4$};
+			\draw (5, 8) -| (5, 7.75);
+			\draw (7, 8) -| (7, 7.75);
+			\draw (9, 8) -| (9, 7.75);
+		\end{tikzpicture}
+			
+		\end{minipage}
+		
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			\rowcolor{headergray}
+			${V1 }$& ${R1}$& ${R2}$& ${R3}$& ${i1}$&${i2}$&${i3}$&${i4}$&$Va$&$Vb$&$Vc$\\ \hline
+			$\SI{5}{\volt}$&\makecell{$\SI{150}{\ohm}$ \\ $\SI{60}{\milli\watt}$}&\makecell{$\SI{50}{\ohm}$ \\ $\SI{20}{\milli\watt}$}&\makecell{$\SI{150}{\ohm}$ \\ $\SI{0}{\milli\watt}$}&$\SI{20}{\milli\ampere}$&$\SI{20}{\milli\ampere}$&$\SI{0}{\milli\ampere}$&$\SI{40}{\milli\ampere}$&$\SI{2}{\volt}$&$\SI{4}{\volt}$&$\SI{5}{\volt}$ \\ \hline
+			$\SI{10}{\volt}$&&\makecell{$\SI{400}{\ohm}$\\ \\}&&$\SI{20}{\milli\ampere}$&&&$\SI{55}{\milli\ampere}$&&& \\ \hline
+			$\SI{3}{\volt}$&\makecell{$\SI{50}{\ohm}$\\ \\}&& &&&&&&& \\ \hline
+			
+		\end{tabular}
+		\\
+		\begin{minipage}{.60\textwidth} 
+			\item
+			\label{doblefuente}
+			Dado el siguiente circuito complete los valores que faltan en la tabla. Utilice el diodo ideal simulado de 2V para los LEDs $D1$ y $D2$ Tenga en cuenta que las referencias a masa (GND) son tomadas desde el negativo de la fuente $V1$. \\
+			
+		\end{minipage}
+		\begin{minipage}{.2\textwidth}
+			\begin{tikzpicture}
+				% Paths, nodes and wires:
+				\draw (3, 8.14) to[battery1, l_={$V2$}] (3, 7.14);
+				\node[plain crossing] at (2.75, 7.89){};
+				\draw (7, 8.5) to[american resistor, l_={$R1$}] (9, 8.5);
+				\draw (3, 6.25) to[american resistor, l_={$R2$}] (5, 6.25);
+				\draw[-latex] (3.5, 8.75) -- (4.5, 8.75);
+				\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm](N1) at (4, 9){} node[anchor=center] at (N1.text){$i1$};
+				\draw[-latex] (8.75, 6.75) -- (8.75, 5.75);
+				\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm](N2) at (8.5, 6.25){} node[anchor=center] at (N2.text){$i3$};
+				\node[circ] at (3, 6.25){};
+				\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm](N3) at (6.75, 8.75){} node[anchor=center] at (N3.text){$Va$};
+				\draw (5, 8.5) to[empty led, l_={$D1$}] (6, 8.5);
+				\draw (5, 6.25) to[empty led, l_={$D2$}] (6, 6.25);
+				\node[circ] at (6.75, 8.5){};
+				\draw (3, 5.25) to[battery1, l_={$V1$}] (3, 4.25);
+				\node[plain crossing] at (2.75, 5){};
+				\draw (3, 8.14) |- (3, 8.5) -- (5, 8.5);
+				\draw[-latex] (3.61, 6.61) -- (4.61, 6.61);
+				\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm](N4) at (4, 7){} node[anchor=center] at (N4.text){$i2$};
+				\draw (6, 6.25) -| (6.75, 8.5);
+				\draw (3, 7.14) |- (3, 5.25);
+				\node[ground] at (3, 4.25){};
+				\node[circ] at (3, 4.25){};
+				\draw (6, 8.5) -- (6.75, 8.5);
+				\draw (6.75, 8.5) -- (7, 8.5);
+				\draw (9, 8.5) |- (3, 4.25);
+			\end{tikzpicture}
+			
+		\end{minipage}
+		
+		\begin{tabular}{|c|c|c|c|c|c|c|c|}
+			\hline
+			\rowcolor{headergray}
+			${V1 }$&${V2 }$&${i1 }$&${R1 }$&${i2 }$&${R2 }$&${Va }$&${i3 }$ \\ \hline
+				$\SI{5}{\volt}$&$\SI{7}{\volt}$&$\SI{20}{\milli\ampere}$&$\SI{500}{\ohm}$&	$\SI{0}{\milli\ampere}$&$\SI{150}{\ohm}$&$\SI{10}{\volt}$&$\SI{20}{\milli\ampere}$ \\ \hline
+				$\SI{5}{\volt}$&$\SI{5}{\volt}$&$\SI{15}{\milli\ampere}$&&&$\SI{20}{\ohm}$&& \\ \hline
+				$\SI{5}{\volt}$&$\SI{0}{\volt}$&&$\SI{75}{\ohm}$&&$\SI{00}{\ohm}$&& \\ \hline
+			
+		\end{tabular}
+		\\
+		\item En el circuito del punto \ref{doblefuente} se invierte el LED $D2$, es decir que ahora su ánodo se encuentra conectado a $Va$ y su cátodo se encuentra conectado a $R2$. El resto se mantiene igual (sentido de corrientes, polaridad de fuentes, etc). Encuentre los valores que faltan en la tabla.\\
+		\begin{tabular}{|c|c|c|c|c|c|c|c|}
+			\hline
+			\rowcolor{headergray}
+			${V1 }$&${V2 }$&${i1 }$&${R1 }$&${i2 }$&${R2 }$&${Va }$&${i3 }$ \\ \hline
+			$\SI{5}{\volt}$&$\SI{7}{\volt}$&&$\SI{1}{\kilo\ohm}$&	$\SI{-10}{\milli\ampere}$&&& \\ \hline
+			$\SI{0}{\volt}$&$\SI{7}{\volt}$&&$\SI{1}{\kilo\ohm}$&&$\SI{300}{\ohm}$&& \\ \hline
+		\end{tabular}
+		
+		\begin{minipage}{.60\textwidth} 
+			\item
+			
+			Dado el siguiente circuito complete los valores que faltan en la tabla. Utilice el diodo ideal simulado de 2V para el LED $D1$. \textit{Nota: El valor de tensión en el punto $Va$ es particularmente importante en este ejercicio. Analice el circuito considerando a priori que el diodo $D1$ no es presente. Al encontrar $Va$ se debe cumplir entonces que $Va\geq2V$ para que $D1$ se encuentre polarizado en directa venciendo el umbral. Luego si eso ocurre, al existir del diodo el valor de $Va$ va a estar forzado en 2V por el diodo } \\
+			
+		\end{minipage}
+		\begin{minipage}{.2\textwidth}
+			\begin{tikzpicture}
+				% Paths, nodes and wires:
+				\draw (7, 8) to[battery1, l_={$V1$}] (7, 7);
+				\node[plain crossing] at (6.75, 7.86){};
+				\draw (9, 9) to[american resistor, l_={$R1$}] (9, 7);
+				\draw (9, 6.5) to[american resistor, l_={$R2$}] (9, 4.5);
+				\draw (11.25, 6.5) to[empty led, l_={$D1$}] (11.25, 4.5);
+				\node[circ] at (9, 6.75){};
+				\node[circ] at (9, 4){};
+				\draw (7, 8) -| (7, 9) -- (9, 9);
+				\draw (9, 7) -| (9, 6.75);
+				\draw (9, 6.5) -| (9, 6.75);
+				\draw (11.25, 6.5) |- (9, 6.75);
+				\draw (9, 4.5) -| (9, 4);
+				\draw (11.25, 4.5) |- (9, 4);
+				\draw (9, 4) |- (7, 4) -| (7, 7);
+				\draw[-latex] (7.5, 9.25) |- (8.75, 9.25);
+				\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](N1) at (8, 9.5){} node[anchor=center] at (N1.text){$i1$};
+				\draw[-latex] (9.5, 6) -- (9.5, 5);
+				\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](N2) at (9.75, 5.5){} node[anchor=center] at (N2.text){$i2$};
+				\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](N3) at (10.25, 7.25){} node[anchor=center] at (N3.text){$i3$};
+				\draw[-latex] (9.75, 7) |- (11, 7);
+				\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](N4) at (8.625, 6.75){} node[anchor=center] at (N4.text){$Va$};
+			\end{tikzpicture}
+			
+		\end{minipage}
+		
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline
+			\rowcolor{headergray}
+			${V1 }$&${R1 }$&${R2 }$&${Va }$&${i1 }$&${i2 }$&${i3 }$ \\ \hline
+			$\SI{5}{\volt}$&$\SI{100}{\ohm}$&$\SI{400}{\ohm}$&$\SI{2}{\volt}$&$\SI{30}{\milli\ampere}$&$\SI{5}{\milli\ampere}$&$\SI{25}{\milli\ampere}$ \\ \hline
+			$\SI{5}{\volt}$&$\SI{250}{\ohm}$&$\SI{250}{\ohm}$&&&& \\ \hline
+			$\SI{5}{\volt}$&$\SI{400}{\ohm}$&$\SI{100}{\ohm}$&&&& \\ \hline
+			$\SI{5}{\volt}$&$\SI{300}{\ohm}$&$\SI{200}{\ohm}$&&&& \\ \hline
+			$\SI{5}{\volt}$&$\SI{200}{\ohm}$&$\SI{250}{\ohm}$&&&& \\ \hline
+			
+		\end{tabular}
+		\begin{tcolorbox}[enhanced,attach boxed title to top center={yshift=-3mm,yshifttext=-1mm},
+			colback=black!5!white,colframe=white!75!black,colbacktitle=red!80!black,
+			title= Atención , fonttitle=\bfseries,
+			boxed title style={size=small,colframe=white,colback=black} ]
+			Recuerde que utilizar diodos en paralelo dependiendo de una única resistencia es una mala idea. Los siguientes ejercicios están pensados para que reflexione acerca de esto. Intente razonar a priori que va a ocurrir con la corriente y que rama va a forzar el valor de tensión en el punto $Va$ 
+		\end{tcolorbox}
+		\begin{minipage}{.60\textwidth} 
+			\item
+			
+			Dado el siguiente circuito complete los valores que faltan en la tabla. El diodo $D1$ equivale al diodo simulado de 2V mientras que $D2$ equivale a default-led.\\
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+				\rowcolor{headergray}
+				${V1 }$&${R1 }$&${Va }$&${i1 }$&${i2 }$&${i3 }$ \\ \hline
+				$\SI{5}{\volt}$&$\SI{320}{\ohm}$&$\SI{1,785}{\milli\volt}$&$\SI{10}{\milli\ampere}$&$\SI{0}{\milli\ampere}$&$\SI{10}{\milli\ampere}$ \\ \hline
+				$\SI{5}{\volt}$&$\SI{640}{\ohm}$&$\SI{1,72}{\milli\volt}$&&& \\ \hline
+				
+				
+			\end{tabular}
+		\end{minipage}
+		\begin{minipage}{.2\textwidth}
+			\begin{tikzpicture}
+				% Paths, nodes and wires:
+				\draw (7, 8) to[battery1, l_={$V1$}] (7, 7);
+				\node[plain crossing] at (6.75, 7.86){};
+				\draw (9, 9) to[american resistor, l_={$R1$}] (9, 7);
+				\draw (11.25, 6.5) to[empty led, l_={$D1$}] (11.25, 4.5);
+				\node[circ] at (9, 6.75){};
+				\node[circ] at (9, 4){};
+				\draw (7, 8) -| (7, 9) -- (9, 9);
+				\draw (9, 7) -| (9, 6.75);
+				\draw (9, 6.5) -| (9, 6.75);
+				\draw (11.25, 6.5) |- (9, 6.75);
+				\draw (9, 4.5) -| (9, 4);
+				\draw (11.25, 4.5) |- (9, 4);
+				\draw (9, 4) |- (7, 4) -| (7, 7);
+				\draw[-latex] (7.5, 9.25) |- (8.75, 9.25);
+				\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](N1) at (8, 9.5){} node[anchor=center] at (N1.text){$i1$};
+				\draw[-latex] (8, 6) -- (8, 5);
+				\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](N2) at (7.625, 5.5){} node[anchor=center] at (N2.text){$i2$};
+				\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](N3) at (10.25, 7.25){} node[anchor=center] at (N3.text){$i3$};
+				\draw[-latex] (9.75, 7) |- (11, 7);
+				\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](N4) at (8.625, 6.75){} node[anchor=center] at (N4.text){$Va$};
+				\draw (9, 6.5) to[empty led, l_={$D2$}] (9, 4.5);
+			\end{tikzpicture}
+			
+		\end{minipage}
+		
+		
+		
+	\begin{minipage}{.60\textwidth} 
+		\item
+		
+		Dado el siguiente circuito complete los valores que faltan en la tabla. El diodo $D1$ equivale al diodo simulado de 2V mientras que $D2$ y $D3$ equivale a default-led.\\
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			\rowcolor{headergray}
+			${V1 }$&${R1 }$&${Va }$&${i1 }$&${i2 }$&${i3 }$ \\ \hline
+			$\SI{5}{\volt}$&$\SI{300}{\ohm}$&&&& \\ \hline
+			
+			
+		\end{tabular}
+		
+	\end{minipage}
+	\begin{minipage}{.2\textwidth}
+		\begin{tikzpicture}
+			% Paths, nodes and wires:
+			\draw (7, 8) to[battery1, l_={$V1$}] (7, 7);
+			\node[plain crossing] at (6.75, 7.86){};
+			\draw (9, 9) to[american resistor, l_={$R1$}] (9, 7);
+			\draw (11.25, 6.5) to[empty led, l_={$D1$}] (11.25, 4.5);
+			\node[circ] at (9, 6.75){};
+			\node[circ] at (9, 4){};
+			\draw (7, 8) -| (7, 9) -- (9, 9);
+			\draw (9, 7) -| (9, 6.75);
+			\draw (9, 6.5) -| (9, 6.75);
+			\draw (11.25, 6.5) |- (9, 6.75);
+			\draw (9, 4.5) -| (9, 4);
+			\draw (11.25, 4.5) |- (9, 4);
+			\draw (9, 4) |- (7, 4) -| (7, 7);
+			\draw[-latex] (7.5, 9.25) |- (8.75, 9.25);
+			\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](N1) at (8, 9.5){} node[anchor=center] at (N1.text){$i1$};
+			\draw[-latex] (7.75, 6) -- (7.75, 5);
+			\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](N2) at (7.5, 5.5){} node[anchor=center] at (N2.text){$i2$};
+			\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](N3) at (10.25, 7.25){} node[anchor=center] at (N3.text){$i3$};
+			\draw[-latex] (9.75, 7) |- (11, 7);
+			\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](N4) at (8.625, 6.75){} node[anchor=center] at (N4.text){$Va$};
+			\draw (9, 6.5) to[empty led, l_={$D2$}] (9, 5.5);
+			\draw (9, 5.5) to[empty led, l_={$D3$}] (9, 4.5);
+		\end{tikzpicture}
+		
+	\end{minipage}
+	
+	
+	
+		
+			\item  Como política de seguridad para el ingreso a cajas de seguridad, un banco requiere que
+			haya dos guardias presentes para habilitar el ingreso. El ingreso habilitado se indica con un
+			diodo LED. Cuando el mismo se enciende el ingreso está habilitado. Cuando el LED está
+			apagado el ingreso está impedido. Los guardias informan su disponibilidad presionando
+			botones en el circuito. El guardia uno presiona $S1$ y el guardia dos presiona $S2$. Considerando
+			que ambos guardias tienen que estar presentes, ¿cuál de los siguientes circuitos cumple con la
+			política del banco? \textit{Nota: Los switches son normales abiertos.}\\
+			\begin{tikzpicture}
+				% Paths, nodes and wires:
+				\draw (6, 9) to[push button, l={$S1$}] (6, 7);
+				\draw (7.4, 9) to[push button, l={$S2$}] (7.4, 7);
+				\node[vcc](N1) at (2, 9.25){} node[anchor=east] at (N1.west){$V_{DD}$};
+				\draw (4.75, 9) to[empty led, l_={$D1$}] (5.75, 9);
+				\draw (2.75, 9) to[american resistor, l_={$R1$}] (4.75, 9);
+				\node[plain crossing] at (1.75, 9.86){};
+				\draw (2, 9.25) -| (2, 9) -- (2.75, 9);
+				\node[circ] at (6, 9){};
+				\node[circ] at (6, 6.5){};
+				\node[ground] at (6, 6.5){};
+				\draw (5.75, 9) -- (6, 9) -| (7.4, 9);
+				\draw (7.4, 7) |- (6, 6.5);
+				\draw (6, 7) -| (6, 6.5);
+			\end{tikzpicture}
+			\begin{tikzpicture}
+				% Paths, nodes and wires:
+				\draw (6, 9) to[push button, l={$S1$}] (6, 7);
+				\draw (6, 7) to[push button, l={$S2$}] (6, 5);
+				\node[vcc](N1) at (2, 9.25){} node[anchor=east] at (N1.west){$V_{DD}$};
+				\draw (4.75, 9) to[empty led, l_={$D1$}] (5.75, 9);
+				\draw (2.75, 9) to[american resistor, l_={$R1$}] (4.75, 9);
+				\node[plain crossing] at (1.75, 9.86){};
+				\draw (2, 9.25) -| (2, 9) -- (2.75, 9);
+				\node[ground] at (6, 5){};
+				\draw (5.75, 9) -- (6, 9);
+			\end{tikzpicture}
+			\\
+			\item Diseñe una lógica donde el LED está siempre encendido salvo que uno de los dos guardias decida apagarlo. \\
+			\item Diseñe una lógica donde el LED está siempre encendido salvo que ambos guardias decidan presionar sus respectivos pulsadores.
+			\item Utilizando logisim-evolution, dispone de  los siguientes transistores para implementar circuitos CMOS \\
+			\begin{tikzpicture}[x=1pt,y=-1pt,line cap=rect]
+				\def\logisimfontA#1{\fontfamily{cmr}{#1}} % Replaced by logisim, original font was "SansSerif"
+				\definecolor{custcol_0_0_0}{RGB}{0, 0, 0}
+				\definecolor{custcol_ff_ff_ff}{RGB}{255, 255, 255}
+				\definecolor{custcol_28_28_ff}{RGB}{40, 40, 255}
+				\draw [line width=3.0pt, custcol_28_28_ff ]  (100.0,32.0) -- (106.0,32.0) -- (106.0,45.0) ;
+				\draw [line width=3.0pt, custcol_28_28_ff ]  (100.0,18.0) -- (106.0,18.0) -- (106.0,5.0) ;
+				\draw [line width=3.0pt, custcol_28_28_ff ]  (86.0,25.0) -- (88.0,25.0) ;
+				\draw [line width=2.0pt, custcol_28_28_ff, rotate around={90: (91.0,25.0) }]  (91.0,25.0) ellipse (3.0 and 3.0 );
+				\draw [line width=2.0pt, custcol_28_28_ff ]  (94.0,33.0) -- (94.0,17.0) ;
+				\draw [line width=2.0pt, custcol_28_28_ff ]  (99.0,36.0) -- (99.0,14.0) ;
+				\draw [line width=1.0pt, custcol_28_28_ff ]  (106.0,24.0) -- (104.0,26.0) -- (102.0,24.0) ;
+				\draw [line width=3.0pt, custcol_28_28_ff ]  (210.0,18.0) -- (216.0,18.0) -- (216.0,5.0) ;
+				\draw [line width=3.0pt, custcol_28_28_ff ]  (210.0,32.0) -- (216.0,32.0) -- (216.0,45.0) ;
+				\draw [line width=3.0pt, custcol_28_28_ff ]  (196.0,25.0) -- (203.0,25.0) ;
+				\draw [line width=2.0pt, custcol_28_28_ff ]  (204.0,17.0) -- (204.0,33.0) ;
+				\draw [line width=2.0pt, custcol_28_28_ff ]  (209.0,14.0) -- (209.0,36.0) ;
+				\draw [line width=1.0pt, custcol_28_28_ff ]  (216.0,26.0) -- (214.0,24.0) -- (212.0,26.0) ;
+				\logisimfontA{\fontsize{16pt}{16pt}\fontseries{bx}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_0, anchor=base west] at  (10.0,31.0)  {Canal P};}
+				\logisimfontA{\fontsize{16pt}{16pt}\fontseries{bx}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_0, anchor=base west] at  (125.0,31.0)  {Canal N};}
+			\end{tikzpicture}
+			\\  Implemente los siguientes circuitos y probando las distintas combinaciones de valores de las entradas A y B complete la tabla de verdad.
+			\begin{enumerate}
+				\item  
+				\begin{minipage}{.20\textwidth} 
+				\begin{tabular}{|c|c|}
+					\hline
+					\rowcolor{headergray}
+					A & F  \\ \hline
+					0 &   \\  \hline
+					1 &   \\  \hline
+				
+				\end{tabular}
+			\end{minipage}
+			\begin{minipage}{.60\textwidth} 
+				\begin{tikzpicture}[x=1pt,y=-1pt,line cap=rect]
+					\def\logisimfontA#1{\fontfamily{cmr}{#1}} % Replaced by logisim, original font was "SansSerif"
+					\def\logisimfontB#1{\fontfamily{cmtt}{#1}} % Replaced by logisim, original font was "Monospaced"
+					\definecolor{custcol_0_0_ff}{RGB}{0, 0, 255}
+					\definecolor{custcol_0_64_0}{RGB}{0, 100, 0}
+					\definecolor{custcol_0_0_0}{RGB}{0, 0, 0}
+					\definecolor{custcol_0_d2_0}{RGB}{0, 210, 0}
+					\definecolor{custcol_40_40_40}{RGB}{64, 64, 64}
+					\definecolor{custcol_ff_ff_ff}{RGB}{255, 255, 255}
+					\definecolor{custcol_28_28_ff}{RGB}{40, 40, 255}
+					\fill [line width=3.0pt, custcol_0_64_0]  (119.0,90.0) ellipse (5.0 and 5.0 );
+					\fill [line width=3.0pt, custcol_0_d2_0]  (69.0,90.0) ellipse (5.0 and 5.0 );
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (113.0,113.0) -- (119.0,113.0) -- (119.0,100.0) -- (119.0,90.0) -- (149.0,90.0) ;
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (69.0,90.0) -- (69.0,120.0) -- (99.0,120.0) -- (106.0,120.0) ;
+					\draw [line width=2.0pt, custcol_0_d2_0 ]  (107.0,112.0) -- (107.0,128.0) ;
+					\draw [line width=2.0pt, custcol_0_64_0 ]  (112.0,109.0) -- (112.0,131.0) ;
+					\draw [line width=1.0pt, custcol_0_64_0 ]  (119.0,121.0) -- (117.0,119.0) -- (115.0,121.0) ;
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (113.0,67.0) -- (119.0,67.0) -- (119.0,80.0) -- (119.0,90.0) ;
+					\draw [line width=2.0pt, custcol_0_d2_0, rotate around={90: (104.0,60.0) }]  (104.0,60.0) ellipse (3.0 and 3.0 );
+					\draw [line width=2.0pt, custcol_0_d2_0 ]  (107.0,68.0) -- (107.0,52.0) ;
+					\draw [line width=2.0pt, custcol_28_28_ff ]  (112.0,71.0) -- (112.0,49.0) ;
+					\draw [line width=1.0pt, custcol_28_28_ff ]  (119.0,59.0) -- (117.0,61.0) -- (115.0,59.0) ;
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (54.0,90.0) -- (59.0,90.0) -- (69.0,90.0) -- (69.0,60.0) -- (99.0,60.0) -- (101.0,60.0) ;
+					\draw [line width=2.0pt, custcol_0_0_0 ]  (44.0,99.0) -- (54.0,90.0) -- (44.0,81.0) -- (20.0,81.0) -- (20.0,99.0) -- cycle;
+					\logisimfontB{\fontsize{12pt}{12pt}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (39.0,97.0)  {b};}
+					\fill [line width=2.0pt, custcol_0_d2_0]  (34.0,89.0) ellipse (4.5 and 7.0 );
+					\logisimfontB{\fontsize{12pt}{12pt}\selectfont\node[inner sep=0, outer sep=0, custcol_ff_ff_ff, anchor=base west] at  (31.0,93.0)  {1};}
+					\logisimfontA{\fontsize{16pt}{16pt}\fontseries{bx}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (5.0,97.0)  {A};}
+					\fill [line width=2.0pt, custcol_0_d2_0]  (59.0,90.0) ellipse (2.0 and 2.0 );
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (113.0,53.0) -- (119.0,53.0) -- (119.0,40.0) -- (119.0,20.0) -- (119.0,15.0) ;
+					\draw [line width=1.0pt, custcol_0_d2_0 ]  (111.0,14.0) -- (119.0,6.0) -- (127.0,14.0) -- cycle;
+					\fill [line width=1.0pt, custcol_0_d2_0]  (119.0,20.0) ellipse (2.0 and 2.0 );
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (113.0,127.0) -- (119.0,127.0) -- (119.0,140.0) -- (119.0,160.0) -- (119.0,165.0) ;
+					\draw [line width=1.0pt, custcol_0_64_0 ]  (127.0,166.0) -- (111.0,166.0) ;
+					\draw [line width=1.0pt, custcol_0_64_0 ]  (124.0,169.0) -- (114.0,169.0) ;
+					\draw [line width=1.0pt, custcol_0_64_0 ]  (121.0,172.0) -- (117.0,172.0) ;
+					\fill [line width=1.0pt, custcol_0_64_0]  (119.0,160.0) ellipse (2.0 and 2.0 );
+					\fill [line width=1.0pt, custcol_40_40_40]  (159.0,90.0) ellipse (9.0 and 9.0 );
+					\draw [line width=2.0pt, custcol_0_0_0]  (159.0,90.0) ellipse (9.0 and 9.0 );
+					\logisimfontA{\fontsize{16pt}{16pt}\fontseries{bx}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (171.0,97.0)  {F};}
+					\fill [line width=1.0pt, custcol_0_64_0]  (149.0,90.0) ellipse (2.0 and 2.0 );
+				\end{tikzpicture} 
+			\end{minipage}
+			\item 
+			\begin{minipage}{.20\textwidth} 
+				\begin{tabular}{|cc|c|}
+						\hline
+					\rowcolor{headergray}
+					A & B & F \\ \hline
+					0 & 0 &   \\ \hline
+					0 & 1 &   \\ \hline
+					1 & 0 &   \\ \hline
+					1 & 1 &   \\ \hline
+				\end{tabular}
+			\end{minipage}
+			\begin{minipage}{.60\textwidth} 
+				\begin{tikzpicture}[x=1pt,y=-1pt,line cap=rect]
+					\def\logisimfontA#1{\fontfamily{cmr}{#1}} % Replaced by logisim, original font was "SansSerif"
+					\def\logisimfontB#1{\fontfamily{cmtt}{#1}} % Replaced by logisim, original font was "Monospaced"
+					\definecolor{custcol_0_0_ff}{RGB}{0, 0, 255}
+					\definecolor{custcol_0_64_0}{RGB}{0, 100, 0}
+					\definecolor{custcol_0_0_0}{RGB}{0, 0, 0}
+					\definecolor{custcol_0_d2_0}{RGB}{0, 210, 0}
+					\definecolor{custcol_ff_ff_ff}{RGB}{255, 255, 255}
+					\definecolor{custcol_f0_0_0}{RGB}{240, 0, 0}
+					\definecolor{custcol_28_28_ff}{RGB}{40, 40, 255}
+					\fill [line width=3.0pt, custcol_0_64_0]  (99.0,90.0) ellipse (5.0 and 5.0 );
+					\fill [line width=3.0pt, custcol_0_d2_0]  (129.0,120.0) ellipse (5.0 and 5.0 );
+					\fill [line width=3.0pt, custcol_0_64_0]  (69.0,40.0) ellipse (5.0 and 5.0 );
+					\fill [line width=3.0pt, custcol_0_64_0]  (129.0,170.0) ellipse (5.0 and 5.0 );
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (69.0,40.0) -- (109.0,40.0) -- (111.0,40.0) ;
+					\draw [line width=2.0pt, custcol_0_64_0, rotate around={90: (114.0,40.0) }]  (114.0,40.0) ellipse (3.0 and 3.0 );
+					\draw [line width=2.0pt, custcol_0_64_0 ]  (117.0,48.0) -- (117.0,32.0) ;
+					\draw [line width=2.0pt, custcol_0_d2_0 ]  (122.0,51.0) -- (122.0,29.0) ;
+					\draw [line width=1.0pt, custcol_0_d2_0 ]  (129.0,39.0) -- (127.0,41.0) -- (125.0,39.0) ;
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (123.0,83.0) -- (129.0,83.0) -- (129.0,70.0) -- (129.0,60.0) -- (129.0,47.0) -- (123.0,47.0) ;
+					\draw [line width=2.0pt, custcol_0_64_0, rotate around={90: (114.0,90.0) }]  (114.0,90.0) ellipse (3.0 and 3.0 );
+					\draw [line width=2.0pt, custcol_0_64_0 ]  (117.0,98.0) -- (117.0,82.0) ;
+					\draw [line width=2.0pt, custcol_0_d2_0 ]  (122.0,101.0) -- (122.0,79.0) ;
+					\draw [line width=1.0pt, custcol_0_d2_0 ]  (129.0,89.0) -- (127.0,91.0) -- (125.0,89.0) ;
+					\draw [line width=2.0pt, custcol_0_0_0 ]  (44.0,49.0) -- (54.0,40.0) -- (44.0,31.0) -- (20.0,31.0) -- (20.0,49.0) -- cycle;
+					\logisimfontB{\fontsize{12pt}{12pt}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (39.0,47.0)  {b};}
+					\fill [line width=2.0pt, custcol_0_64_0]  (34.0,39.0) ellipse (4.5 and 7.0 );
+					\logisimfontB{\fontsize{12pt}{12pt}\selectfont\node[inner sep=0, outer sep=0, custcol_ff_ff_ff, anchor=base west] at  (31.0,43.0)  {0};}
+					\logisimfontA{\fontsize{16pt}{16pt}\fontseries{bx}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (5.0,47.0)  {A};}
+					\fill [line width=2.0pt, custcol_0_64_0]  (59.0,40.0) ellipse (2.0 and 2.0 );
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (54.0,90.0) -- (59.0,90.0) -- (99.0,90.0) -- (109.0,90.0) -- (111.0,90.0) ;
+					\draw [line width=2.0pt, custcol_0_0_0 ]  (44.0,99.0) -- (54.0,90.0) -- (44.0,81.0) -- (20.0,81.0) -- (20.0,99.0) -- cycle;
+					\logisimfontB{\fontsize{12pt}{12pt}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (39.0,97.0)  {b};}
+					\fill [line width=2.0pt, custcol_0_64_0]  (34.0,89.0) ellipse (4.5 and 7.0 );
+					\logisimfontB{\fontsize{12pt}{12pt}\selectfont\node[inner sep=0, outer sep=0, custcol_ff_ff_ff, anchor=base west] at  (31.0,93.0)  {0};}
+					\logisimfontA{\fontsize{16pt}{16pt}\fontseries{bx}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (5.0,97.0)  {B};}
+					\fill [line width=2.0pt, custcol_0_64_0]  (59.0,90.0) ellipse (2.0 and 2.0 );
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (83.0,143.0) -- (89.0,143.0) -- (89.0,130.0) -- (89.0,120.0) -- (129.0,120.0) -- (149.0,120.0) ;
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (54.0,40.0) -- (59.0,40.0) -- (69.0,40.0) -- (69.0,150.0) -- (76.0,150.0) ;
+					\draw [line width=2.0pt, custcol_0_64_0 ]  (77.0,142.0) -- (77.0,158.0) ;
+					\draw [line width=2.0pt, custcol_28_28_ff ]  (82.0,139.0) -- (82.0,161.0) ;
+					\draw [line width=1.0pt, custcol_28_28_ff ]  (89.0,151.0) -- (87.0,149.0) -- (85.0,151.0) ;
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (123.0,143.0) -- (129.0,143.0) -- (129.0,130.0) -- (129.0,120.0) -- (129.0,110.0) -- (129.0,97.0) -- (123.0,97.0) ;
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (123.0,157.0) -- (129.0,157.0) -- (129.0,170.0) ;
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (99.0,90.0) -- (99.0,150.0) -- (109.0,150.0) -- (116.0,150.0) ;
+					\draw [line width=2.0pt, custcol_0_64_0 ]  (117.0,142.0) -- (117.0,158.0) ;
+					\draw [line width=2.0pt, custcol_28_28_ff ]  (122.0,139.0) -- (122.0,161.0) ;
+					\draw [line width=1.0pt, custcol_28_28_ff ]  (129.0,151.0) -- (127.0,149.0) -- (125.0,151.0) ;
+					\fill [line width=1.0pt, custcol_f0_0_0]  (159.0,120.0) ellipse (9.0 and 9.0 );
+					\draw [line width=2.0pt, custcol_0_0_0]  (159.0,120.0) ellipse (9.0 and 9.0 );
+					\logisimfontA{\fontsize{16pt}{16pt}\fontseries{bx}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (171.0,127.0)  {F};}
+					\fill [line width=1.0pt, custcol_0_d2_0]  (149.0,120.0) ellipse (2.0 and 2.0 );
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (83.0,157.0) -- (89.0,157.0) -- (89.0,170.0) -- (129.0,170.0) -- (129.0,180.0) -- (129.0,185.0) ;
+					\draw [line width=1.0pt, custcol_0_64_0 ]  (137.0,186.0) -- (121.0,186.0) ;
+					\draw [line width=1.0pt, custcol_0_64_0 ]  (134.0,189.0) -- (124.0,189.0) ;
+					\draw [line width=1.0pt, custcol_0_64_0 ]  (131.0,192.0) -- (127.0,192.0) ;
+					\fill [line width=1.0pt, custcol_0_64_0]  (129.0,180.0) ellipse (2.0 and 2.0 );
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (123.0,33.0) -- (129.0,33.0) -- (129.0,20.0) -- (129.0,15.0) ;
+					\draw [line width=1.0pt, custcol_0_d2_0 ]  (121.0,14.0) -- (129.0,6.0) -- (137.0,14.0) -- cycle;
+					\fill [line width=1.0pt, custcol_0_d2_0]  (129.0,20.0) ellipse (2.0 and 2.0 );
+				\end{tikzpicture}
+			\end{minipage}
+			\item 
+			\begin{minipage}{.20\textwidth} 
+				\begin{tabular}{|cc|c|}
+						\hline
+					\rowcolor{headergray}
+					A & B & F \\ \hline
+					0 & 0 &   \\ \hline
+					0 & 1 &   \\ \hline
+					1 & 0 &   \\ \hline
+					1 & 1 &   \\ \hline
+				\end{tabular}
+			\end{minipage}
+			\begin{minipage}{.60\textwidth} 
+				\begin{tikzpicture}[x=1pt,y=-1pt,line cap=rect]
+					\def\logisimfontA#1{\fontfamily{cmr}{#1}} % Replaced by logisim, original font was "SansSerif"
+					\def\logisimfontB#1{\fontfamily{cmtt}{#1}} % Replaced by logisim, original font was "Monospaced"
+					\definecolor{custcol_0_0_ff}{RGB}{0, 0, 255}
+					\definecolor{custcol_0_64_0}{RGB}{0, 100, 0}
+					\definecolor{custcol_0_0_0}{RGB}{0, 0, 0}
+					\definecolor{custcol_0_d2_0}{RGB}{0, 210, 0}
+					\definecolor{custcol_40_40_40}{RGB}{64, 64, 64}
+					\definecolor{custcol_ff_ff_ff}{RGB}{255, 255, 255}
+					\definecolor{custcol_28_28_ff}{RGB}{40, 40, 255}
+					\fill [line width=3.0pt, custcol_0_d2_0]  (109.0,110.0) ellipse (5.0 and 5.0 );
+					\fill [line width=3.0pt, custcol_0_64_0]  (139.0,90.0) ellipse (5.0 and 5.0 );
+					\fill [line width=3.0pt, custcol_0_d2_0]  (69.0,60.0) ellipse (5.0 and 5.0 );
+					\fill [line width=3.0pt, custcol_0_d2_0]  (139.0,40.0) ellipse (5.0 and 5.0 );
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (54.0,60.0) -- (59.0,60.0) -- (69.0,60.0) ;
+					\draw [line width=2.0pt, custcol_0_0_0 ]  (44.0,69.0) -- (54.0,60.0) -- (44.0,51.0) -- (20.0,51.0) -- (20.0,69.0) -- cycle;
+					\logisimfontB{\fontsize{12pt}{12pt}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (39.0,67.0)  {b};}
+					\fill [line width=2.0pt, custcol_0_d2_0]  (34.0,59.0) ellipse (4.5 and 7.0 );
+					\logisimfontB{\fontsize{12pt}{12pt}\selectfont\node[inner sep=0, outer sep=0, custcol_ff_ff_ff, anchor=base west] at  (31.0,63.0)  {1};}
+					\logisimfontA{\fontsize{16pt}{16pt}\fontseries{bx}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (5.0,67.0)  {A};}
+					\fill [line width=2.0pt, custcol_0_d2_0]  (59.0,60.0) ellipse (2.0 and 2.0 );
+					\draw [line width=2.0pt, custcol_0_0_0 ]  (44.0,119.0) -- (54.0,110.0) -- (44.0,101.0) -- (20.0,101.0) -- (20.0,119.0) -- cycle;
+					\logisimfontB{\fontsize{12pt}{12pt}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (39.0,117.0)  {b};}
+					\fill [line width=2.0pt, custcol_0_d2_0]  (34.0,109.0) ellipse (4.5 and 7.0 );
+					\logisimfontB{\fontsize{12pt}{12pt}\selectfont\node[inner sep=0, outer sep=0, custcol_ff_ff_ff, anchor=base west] at  (31.0,113.0)  {1};}
+					\logisimfontA{\fontsize{16pt}{16pt}\fontseries{bx}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (5.0,117.0)  {B};}
+					\fill [line width=2.0pt, custcol_0_d2_0]  (59.0,110.0) ellipse (2.0 and 2.0 );
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (93.0,67.0) -- (99.0,67.0) -- (99.0,80.0) -- (99.0,90.0) -- (139.0,90.0) -- (159.0,90.0) ;
+					\draw [line width=2.0pt, custcol_0_d2_0, rotate around={90: (84.0,60.0) }]  (84.0,60.0) ellipse (3.0 and 3.0 );
+					\draw [line width=2.0pt, custcol_0_d2_0 ]  (87.0,68.0) -- (87.0,52.0) ;
+					\draw [line width=2.0pt, custcol_28_28_ff ]  (92.0,71.0) -- (92.0,49.0) ;
+					\draw [line width=1.0pt, custcol_28_28_ff ]  (99.0,59.0) -- (97.0,61.0) -- (95.0,59.0) ;
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (133.0,53.0) -- (139.0,53.0) -- (139.0,40.0) ;
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (109.0,110.0) -- (109.0,60.0) -- (119.0,60.0) -- (121.0,60.0) ;
+					\draw [line width=2.0pt, custcol_0_d2_0, rotate around={90: (124.0,60.0) }]  (124.0,60.0) ellipse (3.0 and 3.0 );
+					\draw [line width=2.0pt, custcol_0_d2_0 ]  (127.0,68.0) -- (127.0,52.0) ;
+					\draw [line width=2.0pt, custcol_28_28_ff ]  (132.0,71.0) -- (132.0,49.0) ;
+					\draw [line width=1.0pt, custcol_28_28_ff ]  (139.0,59.0) -- (137.0,61.0) -- (135.0,59.0) ;
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (93.0,53.0) -- (99.0,53.0) -- (99.0,40.0) -- (139.0,40.0) -- (139.0,20.0) -- (139.0,15.0) ;
+					\draw [line width=1.0pt, custcol_0_d2_0 ]  (131.0,14.0) -- (139.0,6.0) -- (147.0,14.0) -- cycle;
+					\fill [line width=1.0pt, custcol_0_d2_0]  (139.0,20.0) ellipse (2.0 and 2.0 );
+					\draw [line width=1.0pt, custcol_0_64_0 ]  (147.0,206.0) -- (131.0,206.0) ;
+					\draw [line width=1.0pt, custcol_0_64_0 ]  (144.0,209.0) -- (134.0,209.0) ;
+					\draw [line width=1.0pt, custcol_0_64_0 ]  (141.0,212.0) -- (137.0,212.0) ;
+					\fill [line width=1.0pt, custcol_0_64_0]  (139.0,200.0) ellipse (2.0 and 2.0 );
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (133.0,177.0) -- (139.0,177.0) -- (139.0,190.0) -- (139.0,200.0) -- (139.0,205.0) ;
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (81.0,60.0) -- (79.0,60.0) -- (69.0,60.0) -- (69.0,170.0) -- (119.0,170.0) -- (126.0,170.0) ;
+					\draw [line width=2.0pt, custcol_0_d2_0 ]  (127.0,162.0) -- (127.0,178.0) ;
+					\draw [line width=2.0pt, custcol_0_64_0 ]  (132.0,159.0) -- (132.0,181.0) ;
+					\draw [line width=1.0pt, custcol_0_64_0 ]  (139.0,171.0) -- (137.0,169.0) -- (135.0,171.0) ;
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (133.0,113.0) -- (139.0,113.0) -- (139.0,100.0) -- (139.0,90.0) -- (139.0,80.0) -- (139.0,67.0) -- (133.0,67.0) ;
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (133.0,127.0) -- (139.0,127.0) -- (139.0,140.0) -- (139.0,150.0) -- (139.0,163.0) -- (133.0,163.0) ;
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (54.0,110.0) -- (59.0,110.0) -- (109.0,110.0) -- (109.0,120.0) -- (119.0,120.0) -- (126.0,120.0) ;
+					\draw [line width=2.0pt, custcol_0_d2_0 ]  (127.0,112.0) -- (127.0,128.0) ;
+					\draw [line width=2.0pt, custcol_0_64_0 ]  (132.0,109.0) -- (132.0,131.0) ;
+					\draw [line width=1.0pt, custcol_0_64_0 ]  (139.0,121.0) -- (137.0,119.0) -- (135.0,121.0) ;
+					\fill [line width=1.0pt, custcol_40_40_40]  (169.0,90.0) ellipse (9.0 and 9.0 );
+					\draw [line width=2.0pt, custcol_0_0_0]  (169.0,90.0) ellipse (9.0 and 9.0 );
+					\logisimfontA{\fontsize{16pt}{16pt}\fontseries{bx}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (181.0,97.0)  {F};}
+					\fill [line width=1.0pt, custcol_0_64_0]  (159.0,90.0) ellipse (2.0 and 2.0 );
+				\end{tikzpicture}
+			\end{minipage}
+			\end{enumerate}
+			\item Dado el siguiente circuito, complete la tabla de verdad e identifique a que compuerta corresponde (NAND, NOR, AND, OR, XOR, XNOR).
+			\\
+			\begin{minipage}{.20\textwidth} 
+				\begin{tabular}{|cc|c|}
+					\hline
+					\rowcolor{headergray}
+					A & B & F \\ \hline
+					0 & 0 &   \\ \hline
+					0 & 1 &   \\ \hline
+					1 & 0 &   \\ \hline
+					1 & 1 &   \\ \hline
+				\end{tabular}
+			\end{minipage}
+			\begin{minipage}{.60\textwidth} 
+				\begin{tikzpicture}[x=1pt,y=-1pt,line cap=rect]
+					\def\logisimfontA#1{\fontfamily{cmr}{#1}} % Replaced by logisim, original font was "SansSerif"
+					\def\logisimfontB#1{\fontfamily{cmtt}{#1}} % Replaced by logisim, original font was "Monospaced"
+					\definecolor{custcol_0_0_ff}{RGB}{0, 0, 255}
+					\definecolor{custcol_0_64_0}{RGB}{0, 100, 0}
+					\definecolor{custcol_0_0_0}{RGB}{0, 0, 0}
+					\definecolor{custcol_0_d2_0}{RGB}{0, 210, 0}
+					\definecolor{custcol_ff_ff_ff}{RGB}{255, 255, 255}
+					\definecolor{custcol_f0_0_0}{RGB}{240, 0, 0}
+					\definecolor{custcol_28_28_ff}{RGB}{40, 40, 255}
+					\fill [line width=3.0pt, custcol_0_64_0]  (169.0,90.0) ellipse (5.0 and 5.0 );
+					\fill [line width=3.0pt, custcol_0_d2_0]  (69.0,60.0) ellipse (5.0 and 5.0 );
+					\fill [line width=3.0pt, custcol_0_64_0]  (139.0,200.0) ellipse (5.0 and 5.0 );
+					\fill [line width=3.0pt, custcol_0_d2_0]  (109.0,110.0) ellipse (5.0 and 5.0 );
+					\fill [line width=3.0pt, custcol_0_64_0]  (139.0,90.0) ellipse (5.0 and 5.0 );
+					\fill [line width=3.0pt, custcol_0_d2_0]  (199.0,90.0) ellipse (5.0 and 5.0 );
+					\fill [line width=3.0pt, custcol_0_d2_0]  (139.0,40.0) ellipse (5.0 and 5.0 );
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (54.0,60.0) -- (59.0,60.0) -- (69.0,60.0) ;
+					\draw [line width=2.0pt, custcol_0_0_0 ]  (44.0,69.0) -- (54.0,60.0) -- (44.0,51.0) -- (20.0,51.0) -- (20.0,69.0) -- cycle;
+					\logisimfontB{\fontsize{12pt}{12pt}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (39.0,67.0)  {b};}
+					\fill [line width=2.0pt, custcol_0_d2_0]  (34.0,59.0) ellipse (4.5 and 7.0 );
+					\logisimfontB{\fontsize{12pt}{12pt}\selectfont\node[inner sep=0, outer sep=0, custcol_ff_ff_ff, anchor=base west] at  (31.0,63.0)  {1};}
+					\logisimfontA{\fontsize{16pt}{16pt}\fontseries{bx}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (5.0,67.0)  {A};}
+					\fill [line width=2.0pt, custcol_0_d2_0]  (59.0,60.0) ellipse (2.0 and 2.0 );
+					\draw [line width=2.0pt, custcol_0_0_0 ]  (44.0,119.0) -- (54.0,110.0) -- (44.0,101.0) -- (20.0,101.0) -- (20.0,119.0) -- cycle;
+					\logisimfontB{\fontsize{12pt}{12pt}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (39.0,117.0)  {b};}
+					\fill [line width=2.0pt, custcol_0_d2_0]  (34.0,109.0) ellipse (4.5 and 7.0 );
+					\logisimfontB{\fontsize{12pt}{12pt}\selectfont\node[inner sep=0, outer sep=0, custcol_ff_ff_ff, anchor=base west] at  (31.0,113.0)  {1};}
+					\logisimfontA{\fontsize{16pt}{16pt}\fontseries{bx}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (5.0,117.0)  {B};}
+					\fill [line width=2.0pt, custcol_0_d2_0]  (59.0,110.0) ellipse (2.0 and 2.0 );
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (93.0,67.0) -- (99.0,67.0) -- (99.0,80.0) -- (99.0,90.0) -- (139.0,90.0) -- (169.0,90.0) ;
+					\draw [line width=2.0pt, custcol_0_d2_0, rotate around={90: (84.0,60.0) }]  (84.0,60.0) ellipse (3.0 and 3.0 );
+					\draw [line width=2.0pt, custcol_0_d2_0 ]  (87.0,68.0) -- (87.0,52.0) ;
+					\draw [line width=2.0pt, custcol_28_28_ff ]  (92.0,71.0) -- (92.0,49.0) ;
+					\draw [line width=1.0pt, custcol_28_28_ff ]  (99.0,59.0) -- (97.0,61.0) -- (95.0,59.0) ;
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (133.0,53.0) -- (139.0,53.0) -- (139.0,40.0) -- (99.0,40.0) -- (99.0,53.0) -- (93.0,53.0) ;
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (109.0,110.0) -- (109.0,60.0) -- (119.0,60.0) -- (121.0,60.0) ;
+					\draw [line width=2.0pt, custcol_0_d2_0, rotate around={90: (124.0,60.0) }]  (124.0,60.0) ellipse (3.0 and 3.0 );
+					\draw [line width=2.0pt, custcol_0_d2_0 ]  (127.0,68.0) -- (127.0,52.0) ;
+					\draw [line width=2.0pt, custcol_28_28_ff ]  (132.0,71.0) -- (132.0,49.0) ;
+					\draw [line width=1.0pt, custcol_28_28_ff ]  (139.0,59.0) -- (137.0,61.0) -- (135.0,59.0) ;
+					\draw [line width=1.0pt, custcol_0_d2_0 ]  (131.0,14.0) -- (139.0,6.0) -- (147.0,14.0) -- cycle;
+					\fill [line width=1.0pt, custcol_0_d2_0]  (139.0,20.0) ellipse (2.0 and 2.0 );
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (81.0,60.0) -- (79.0,60.0) -- (69.0,60.0) -- (69.0,170.0) -- (119.0,170.0) -- (126.0,170.0) ;
+					\draw [line width=2.0pt, custcol_0_d2_0 ]  (127.0,162.0) -- (127.0,178.0) ;
+					\draw [line width=2.0pt, custcol_0_64_0 ]  (132.0,159.0) -- (132.0,181.0) ;
+					\draw [line width=1.0pt, custcol_0_64_0 ]  (139.0,171.0) -- (137.0,169.0) -- (135.0,171.0) ;
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (133.0,113.0) -- (139.0,113.0) -- (139.0,100.0) -- (139.0,90.0) -- (139.0,80.0) -- (139.0,67.0) -- (133.0,67.0) ;
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (133.0,127.0) -- (139.0,127.0) -- (139.0,140.0) -- (139.0,150.0) -- (139.0,163.0) -- (133.0,163.0) ;
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (54.0,110.0) -- (59.0,110.0) -- (109.0,110.0) -- (109.0,120.0) -- (119.0,120.0) -- (126.0,120.0) ;
+					\draw [line width=2.0pt, custcol_0_d2_0 ]  (127.0,112.0) -- (127.0,128.0) ;
+					\draw [line width=2.0pt, custcol_0_64_0 ]  (132.0,109.0) -- (132.0,131.0) ;
+					\draw [line width=1.0pt, custcol_0_64_0 ]  (139.0,121.0) -- (137.0,119.0) -- (135.0,121.0) ;
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (193.0,77.0) -- (199.0,77.0) -- (199.0,90.0) ;
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (193.0,63.0) -- (199.0,63.0) -- (199.0,50.0) -- (199.0,40.0) -- (139.0,40.0) -- (139.0,20.0) -- (139.0,15.0) ;
+					\draw [line width=2.0pt, custcol_0_64_0, rotate around={90: (184.0,70.0) }]  (184.0,70.0) ellipse (3.0 and 3.0 );
+					\draw [line width=2.0pt, custcol_0_64_0 ]  (187.0,78.0) -- (187.0,62.0) ;
+					\draw [line width=2.0pt, custcol_0_d2_0 ]  (192.0,81.0) -- (192.0,59.0) ;
+					\draw [line width=1.0pt, custcol_0_d2_0 ]  (199.0,69.0) -- (197.0,71.0) -- (195.0,69.0) ;
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (193.0,113.0) -- (199.0,113.0) -- (199.0,100.0) -- (199.0,90.0) -- (209.0,90.0) ;
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (193.0,127.0) -- (199.0,127.0) -- (199.0,140.0) -- (199.0,200.0) -- (139.0,200.0) -- (139.0,190.0) -- (139.0,177.0) -- (133.0,177.0) ;
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (181.0,70.0) -- (179.0,70.0) -- (169.0,70.0) -- (169.0,90.0) -- (169.0,120.0) -- (179.0,120.0) -- (186.0,120.0) ;
+					\draw [line width=2.0pt, custcol_0_64_0 ]  (187.0,112.0) -- (187.0,128.0) ;
+					\draw [line width=2.0pt, custcol_28_28_ff ]  (192.0,109.0) -- (192.0,131.0) ;
+					\draw [line width=1.0pt, custcol_28_28_ff ]  (199.0,121.0) -- (197.0,119.0) -- (195.0,121.0) ;
+					\fill [line width=1.0pt, custcol_f0_0_0]  (219.0,90.0) ellipse (9.0 and 9.0 );
+					\draw [line width=2.0pt, custcol_0_0_0]  (219.0,90.0) ellipse (9.0 and 9.0 );
+					\logisimfontA{\fontsize{16pt}{16pt}\fontseries{bx}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (231.0,97.0)  {F};}
+					\fill [line width=1.0pt, custcol_0_d2_0]  (209.0,90.0) ellipse (2.0 and 2.0 );
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (139.0,200.0) -- (139.0,210.0) -- (139.0,215.0) ;
+					\draw [line width=1.0pt, custcol_0_64_0 ]  (147.0,216.0) -- (131.0,216.0) ;
+					\draw [line width=1.0pt, custcol_0_64_0 ]  (144.0,219.0) -- (134.0,219.0) ;
+					\draw [line width=1.0pt, custcol_0_64_0 ]  (141.0,222.0) -- (137.0,222.0) ;
+					\fill [line width=1.0pt, custcol_0_64_0]  (139.0,210.0) ellipse (2.0 and 2.0 );
+				\end{tikzpicture}
+			\end{minipage}
+			\item Dada la siguiente tabla de verdad, implemente el circuito que cumple con la salida F utilizando transistores CMOS en logisim-evolution.\textit{Nota: tenga en cuenta que una compuerta OR es equivalente a negar una compuerta NOR} \\
+			\begin{tabular}{|cc|c|}
+				\hline
+				\rowcolor{headergray}
+				A & B & F \\ \hline
+				0 & 0 & 0  \\ \hline
+				0 & 1 & 1  \\ \hline
+				1 & 0 & 1  \\ \hline
+				1 & 1 & 1  \\ \hline
+			\end{tabular}
+			\item Implemente una compuerta XOR con transistores CMOS. Dejamos como referencia el circuito equivalente implementado con compuertas AND, OR y NOT. 
+			\\
+			\begin{minipage}{.20\textwidth} 
+				\begin{tabular}{|cc|c|}
+					\hline
+					\rowcolor{headergray}
+					A & B & F \\ \hline
+					0 & 0 & 0  \\ \hline
+					0 & 1 & 1  \\ \hline
+					1 & 0 & 1  \\ \hline
+					1 & 1 & 0  \\ \hline
+				\end{tabular}
+			\end{minipage}
+			\begin{minipage}{.60\textwidth} 
+				\begin{tikzpicture}[x=1pt,y=-1pt,line cap=rect]
+					\def\logisimfontA#1{\fontfamily{cmr}{#1}} % Replaced by logisim, original font was "SansSerif"
+					\def\logisimfontB#1{\fontfamily{cmtt}{#1}} % Replaced by logisim, original font was "Monospaced"
+					\definecolor{custcol_0_0_ff}{RGB}{0, 0, 255}
+					\definecolor{custcol_0_64_0}{RGB}{0, 100, 0}
+					\definecolor{custcol_0_0_0}{RGB}{0, 0, 0}
+					\definecolor{custcol_0_d2_0}{RGB}{0, 210, 0}
+					\definecolor{custcol_ff_ff_ff}{RGB}{255, 255, 255}
+					\definecolor{custcol_f0_0_0}{RGB}{240, 0, 0}
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (129.0,85.0) -- (69.0,85.0) -- (69.0,15.0) -- (89.0,15.0) ;
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (119.0,65.0) -- (129.0,65.0) ;
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (119.0,15.0) -- (129.0,15.0) ;
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (209.0,55.0) -- (219.0,55.0) ;
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (79.0,65.0) -- (89.0,65.0) ;
+					\fill [line width=3.0pt, custcol_0_d2_0]  (79.0,65.0) ellipse (5.0 and 5.0 );
+					\fill [line width=3.0pt, custcol_0_64_0]  (69.0,15.0) ellipse (5.0 and 5.0 );
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (54.0,15.0) -- (59.0,15.0) -- (69.0,15.0) ;
+					\draw [line width=2.0pt, custcol_0_0_0 ]  (44.0,24.0) -- (54.0,15.0) -- (44.0,6.0) -- (20.0,6.0) -- (20.0,24.0) -- cycle;
+					\logisimfontB{\fontsize{12pt}{12pt}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (39.0,22.0)  {b};}
+					\fill [line width=2.0pt, custcol_0_64_0]  (34.0,14.0) ellipse (4.5 and 7.0 );
+					\logisimfontB{\fontsize{12pt}{12pt}\selectfont\node[inner sep=0, outer sep=0, custcol_ff_ff_ff, anchor=base west] at  (31.0,18.0)  {0};}
+					\logisimfontA{\fontsize{16pt}{16pt}\fontseries{bx}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (5.0,22.0)  {A};}
+					\fill [line width=2.0pt, custcol_0_64_0]  (59.0,15.0) ellipse (2.0 and 2.0 );
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (54.0,65.0) -- (59.0,65.0) -- (79.0,65.0) -- (79.0,35.0) -- (129.0,35.0) ;
+					\draw [line width=2.0pt, custcol_0_0_0 ]  (44.0,74.0) -- (54.0,65.0) -- (44.0,56.0) -- (20.0,56.0) -- (20.0,74.0) -- cycle;
+					\logisimfontB{\fontsize{12pt}{12pt}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (39.0,72.0)  {b};}
+					\fill [line width=2.0pt, custcol_0_d2_0]  (34.0,64.0) ellipse (4.5 and 7.0 );
+					\logisimfontB{\fontsize{12pt}{12pt}\selectfont\node[inner sep=0, outer sep=0, custcol_ff_ff_ff, anchor=base west] at  (31.0,68.0)  {1};}
+					\logisimfontA{\fontsize{16pt}{16pt}\fontseries{bx}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (5.0,72.0)  {B};}
+					\fill [line width=2.0pt, custcol_0_d2_0]  (59.0,65.0) ellipse (2.0 and 2.0 );
+					\draw [line width=2.0pt, custcol_0_0_0] (144.0,40.0) arc (90.0:-90.0:15.0 and 15.0 );
+					\draw [line width=2.0pt, custcol_0_0_0 ]  (144.0,10.0) -- (130.0,10.0) -- (130.0,40.0) -- (144.0,40.0) ;
+					\fill [line width=2.0pt, custcol_0_d2_0]  (159.0,25.0) ellipse (2.0 and 2.0 );
+					\fill [line width=2.0pt, custcol_0_d2_0]  (129.0,15.0) ellipse (2.0 and 2.0 );
+					\fill [line width=2.0pt, custcol_0_d2_0]  (129.0,35.0) ellipse (2.0 and 2.0 );
+					\draw [line width=2.0pt, custcol_0_0_0] (144.0,90.0) arc (90.0:-90.0:15.0 and 15.0 );
+					\draw [line width=2.0pt, custcol_0_0_0 ]  (144.0,60.0) -- (130.0,60.0) -- (130.0,90.0) -- (144.0,90.0) ;
+					\fill [line width=2.0pt, custcol_0_64_0]  (159.0,75.0) ellipse (2.0 and 2.0 );
+					\fill [line width=2.0pt, custcol_0_64_0]  (129.0,65.0) ellipse (2.0 and 2.0 );
+					\fill [line width=2.0pt, custcol_0_64_0]  (129.0,85.0) ellipse (2.0 and 2.0 );
+					\draw [line width=2.0pt, custcol_0_0_0 ]  (109.0,65.0) -- (90.0,58.0) -- (90.0,72.0) -- cycle;
+					\draw [line width=2.0pt, custcol_0_0_0]  (114.0,65.0) ellipse (4.5 and 4.5 );
+					\fill [line width=2.0pt, custcol_0_64_0]  (119.0,65.0) ellipse (2.0 and 2.0 );
+					\fill [line width=2.0pt, custcol_0_d2_0]  (89.0,65.0) ellipse (2.0 and 2.0 );
+					\draw [line width=2.0pt, custcol_0_0_0 ]  (109.0,15.0) -- (90.0,8.0) -- (90.0,22.0) -- cycle;
+					\draw [line width=2.0pt, custcol_0_0_0]  (114.0,15.0) ellipse (4.5 and 4.5 );
+					\fill [line width=2.0pt, custcol_0_d2_0]  (119.0,15.0) ellipse (2.0 and 2.0 );
+					\fill [line width=2.0pt, custcol_0_64_0]  (89.0,15.0) ellipse (2.0 and 2.0 );
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (159.0,25.0) -- (169.0,25.0) -- (169.0,45.0) -- (179.0,45.0) -- (181.0,45.0) ;
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (159.0,75.0) -- (169.0,75.0) -- (169.0,65.0) -- (179.0,65.0) -- (179.0,65.0) ;
+					\draw [line width=2.0pt, custcol_0_0_0 ]  (209.0,55.0) .. controls  (199.0,40.0)  ..  (179.0,40.0) .. controls  (187.0,55.0)  ..  (179.0,70.0) .. controls  (199.0,70.0)  ..  (209.0,55.0) -- cycle ;
+					\fill [line width=2.0pt, custcol_0_d2_0]  (209.0,55.0) ellipse (2.0 and 2.0 );
+					\fill [line width=2.0pt, custcol_0_d2_0]  (179.0,45.0) ellipse (2.0 and 2.0 );
+					\fill [line width=2.0pt, custcol_0_64_0]  (179.0,65.0) ellipse (2.0 and 2.0 );
+					\fill [line width=1.0pt, custcol_f0_0_0]  (229.0,55.0) ellipse (9.0 and 9.0 );
+					\draw [line width=2.0pt, custcol_0_0_0]  (229.0,55.0) ellipse (9.0 and 9.0 );
+					\logisimfontA{\fontsize{16pt}{16pt}\fontseries{bx}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (241.0,62.0)  {F};}
+					\fill [line width=1.0pt, custcol_0_d2_0]  (219.0,55.0) ellipse (2.0 and 2.0 );
+				\end{tikzpicture}
+			\end{minipage}
+			\item Implemente una compuerta XNOR con transistores CMOS. Dejamos como referencia el circuito equivalente implementado con compuertas AND, NOR y NOT. 
+			\\
+			\begin{minipage}{.20\textwidth} 
+				\begin{tabular}{|cc|c|}
+					\hline
+					\rowcolor{headergray}
+					A & B & F \\ \hline
+					0 & 0 & 1  \\ \hline
+					0 & 1 & 0  \\ \hline
+					1 & 0 & 0  \\ \hline
+					1 & 1 & 1  \\ \hline
+				\end{tabular}
+			\end{minipage}
+			\begin{minipage}{.60\textwidth} 
+				\begin{tikzpicture}[x=1pt,y=-1pt,line cap=rect]
+					\def\logisimfontA#1{\fontfamily{cmr}{#1}} % Replaced by logisim, original font was "SansSerif"
+					\def\logisimfontB#1{\fontfamily{cmtt}{#1}} % Replaced by logisim, original font was "Monospaced"
+					\definecolor{custcol_0_0_ff}{RGB}{0, 0, 255}
+					\definecolor{custcol_0_64_0}{RGB}{0, 100, 0}
+					\definecolor{custcol_0_0_0}{RGB}{0, 0, 0}
+					\definecolor{custcol_0_d2_0}{RGB}{0, 210, 0}
+					\definecolor{custcol_ff_ff_ff}{RGB}{255, 255, 255}
+					\definecolor{custcol_f0_0_0}{RGB}{240, 0, 0}
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (129.0,85.0) -- (69.0,85.0) -- (69.0,15.0) -- (89.0,15.0) ;
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (119.0,65.0) -- (129.0,65.0) ;
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (119.0,15.0) -- (129.0,15.0) ;
+					\draw [line width=3.0pt, custcol_0_d2_0 ]  (219.0,55.0) -- (229.0,55.0) ;
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (79.0,65.0) -- (89.0,65.0) ;
+					\fill [line width=3.0pt, custcol_0_64_0]  (79.0,65.0) ellipse (5.0 and 5.0 );
+					\fill [line width=3.0pt, custcol_0_64_0]  (69.0,15.0) ellipse (5.0 and 5.0 );
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (54.0,15.0) -- (59.0,15.0) -- (69.0,15.0) ;
+					\draw [line width=2.0pt, custcol_0_0_0 ]  (44.0,24.0) -- (54.0,15.0) -- (44.0,6.0) -- (20.0,6.0) -- (20.0,24.0) -- cycle;
+					\logisimfontB{\fontsize{12pt}{12pt}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (39.0,22.0)  {b};}
+					\fill [line width=2.0pt, custcol_0_64_0]  (34.0,14.0) ellipse (4.5 and 7.0 );
+					\logisimfontB{\fontsize{12pt}{12pt}\selectfont\node[inner sep=0, outer sep=0, custcol_ff_ff_ff, anchor=base west] at  (31.0,18.0)  {0};}
+					\logisimfontA{\fontsize{16pt}{16pt}\fontseries{bx}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (5.0,22.0)  {A};}
+					\fill [line width=2.0pt, custcol_0_64_0]  (59.0,15.0) ellipse (2.0 and 2.0 );
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (54.0,65.0) -- (59.0,65.0) -- (79.0,65.0) -- (79.0,35.0) -- (129.0,35.0) ;
+					\draw [line width=2.0pt, custcol_0_0_0 ]  (44.0,74.0) -- (54.0,65.0) -- (44.0,56.0) -- (20.0,56.0) -- (20.0,74.0) -- cycle;
+					\logisimfontB{\fontsize{12pt}{12pt}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (39.0,72.0)  {b};}
+					\fill [line width=2.0pt, custcol_0_64_0]  (34.0,64.0) ellipse (4.5 and 7.0 );
+					\logisimfontB{\fontsize{12pt}{12pt}\selectfont\node[inner sep=0, outer sep=0, custcol_ff_ff_ff, anchor=base west] at  (31.0,68.0)  {0};}
+					\logisimfontA{\fontsize{16pt}{16pt}\fontseries{bx}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (5.0,72.0)  {B};}
+					\fill [line width=2.0pt, custcol_0_64_0]  (59.0,65.0) ellipse (2.0 and 2.0 );
+					\draw [line width=2.0pt, custcol_0_0_0] (144.0,40.0) arc (90.0:-90.0:15.0 and 15.0 );
+					\draw [line width=2.0pt, custcol_0_0_0 ]  (144.0,10.0) -- (130.0,10.0) -- (130.0,40.0) -- (144.0,40.0) ;
+					\fill [line width=2.0pt, custcol_0_64_0]  (159.0,25.0) ellipse (2.0 and 2.0 );
+					\fill [line width=2.0pt, custcol_0_d2_0]  (129.0,15.0) ellipse (2.0 and 2.0 );
+					\fill [line width=2.0pt, custcol_0_64_0]  (129.0,35.0) ellipse (2.0 and 2.0 );
+					\draw [line width=2.0pt, custcol_0_0_0] (144.0,90.0) arc (90.0:-90.0:15.0 and 15.0 );
+					\draw [line width=2.0pt, custcol_0_0_0 ]  (144.0,60.0) -- (130.0,60.0) -- (130.0,90.0) -- (144.0,90.0) ;
+					\fill [line width=2.0pt, custcol_0_64_0]  (159.0,75.0) ellipse (2.0 and 2.0 );
+					\fill [line width=2.0pt, custcol_0_d2_0]  (129.0,65.0) ellipse (2.0 and 2.0 );
+					\fill [line width=2.0pt, custcol_0_64_0]  (129.0,85.0) ellipse (2.0 and 2.0 );
+					\draw [line width=2.0pt, custcol_0_0_0 ]  (109.0,65.0) -- (90.0,58.0) -- (90.0,72.0) -- cycle;
+					\draw [line width=2.0pt, custcol_0_0_0]  (114.0,65.0) ellipse (4.5 and 4.5 );
+					\fill [line width=2.0pt, custcol_0_d2_0]  (119.0,65.0) ellipse (2.0 and 2.0 );
+					\fill [line width=2.0pt, custcol_0_64_0]  (89.0,65.0) ellipse (2.0 and 2.0 );
+					\draw [line width=2.0pt, custcol_0_0_0 ]  (109.0,15.0) -- (90.0,8.0) -- (90.0,22.0) -- cycle;
+					\draw [line width=2.0pt, custcol_0_0_0]  (114.0,15.0) ellipse (4.5 and 4.5 );
+					\fill [line width=2.0pt, custcol_0_d2_0]  (119.0,15.0) ellipse (2.0 and 2.0 );
+					\fill [line width=2.0pt, custcol_0_64_0]  (89.0,15.0) ellipse (2.0 and 2.0 );
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (159.0,25.0) -- (169.0,25.0) -- (169.0,45.0) -- (179.0,45.0) -- (181.0,45.0) ;
+					\draw [line width=3.0pt, custcol_0_64_0 ]  (159.0,75.0) -- (169.0,75.0) -- (169.0,65.0) -- (179.0,65.0) -- (179.0,65.0) ;
+					\draw [line width=2.0pt, custcol_0_0_0 ]  (209.0,55.0) .. controls  (199.0,40.0)  ..  (179.0,40.0) .. controls  (187.0,55.0)  ..  (179.0,70.0) .. controls  (199.0,70.0)  ..  (209.0,55.0) -- cycle ;
+					\draw [line width=2.0pt, custcol_0_0_0]  (214.0,55.0) ellipse (4.5 and 4.5 );
+					\fill [line width=2.0pt, custcol_0_d2_0]  (219.0,55.0) ellipse (2.0 and 2.0 );
+					\fill [line width=2.0pt, custcol_0_64_0]  (179.0,45.0) ellipse (2.0 and 2.0 );
+					\fill [line width=2.0pt, custcol_0_64_0]  (179.0,65.0) ellipse (2.0 and 2.0 );
+					\fill [line width=1.0pt, custcol_f0_0_0]  (239.0,55.0) ellipse (9.0 and 9.0 );
+					\draw [line width=2.0pt, custcol_0_0_0]  (239.0,55.0) ellipse (9.0 and 9.0 );
+					\logisimfontA{\fontsize{16pt}{16pt}\fontseries{bx}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (251.0,62.0)  {F};}
+					\fill [line width=1.0pt, custcol_0_d2_0]  (229.0,55.0) ellipse (2.0 and 2.0 );
+				\end{tikzpicture}
+			\end{minipage}	 
+    \end{enumerate}
+    \clearpage
+    	\section*{C- Tecnología}
+    	\begin{enumerate}[label=\textbf{C.\arabic*}]
+    		\item Busque la hoja de datos del circuito integrado CD4069 (CMOS Hex Inverter)\\
+    		https://www.ti.com/lit/ds/symlink/cd4069ub.pdf \\
+    		Encuentre los siguientes parámetros: VDD (max), TPLH y TPHL (5V) , y todas las corrientes y
+    		tensiones de entrada y salida (puede usar 25 C de temperatura y reportar max,min,typ según
+    		prefiera). Identifique claramente cuál es la unidad de cada parámetro.
+    		\item Indique que es el período, la frecuencia y el ciclo de actividad de una señal periódica
+    		\item Complete la tabla con los valores solicitados \\
+    		\begin{tabular}{|l|c|}
+    			\hline
+    			\rowcolor{headergray}
+    			Pregunta & Valor \\ \hline
+    			¿Cuántos picosegundos hay en un nanosegundo? & \\ \hline
+    			¿Cuántos picosegundos hay en un medio nanosegundo? & \\ \hline
+    			¿Cuántos picosegundos hay en un milisegundo? & \\ \hline
+    			¿Cuántos milisegundos hay en un segundo? & \\ \hline
+    			¿Cuántos microsegundos hay en un segundo? & \\ \hline
+    			¿Cuántos microsegundos hay en un milisegundo? & \\ \hline
+    			¿Cuántos microsegundos hay en un medio milisegundo? & \\ \hline
+    			¿Cuántos microsegundos hay en 1000 nanosegundos? & \\ \hline
+    		\end{tabular}
+    		\item Indique el período para señales periódicas de: \SI{1}{\hertz} , \SI{50}{\hertz} , \SI{100}{\hertz} , \SI{500}{\hertz} , \SI{1}{\kilo\hertz} , \SI{2}{\kilo\hertz} ,  \SI{1}{\mega\hertz} , \SI{2}{\mega\hertz} , \SI{50}{\mega\hertz} , \SI{100}{\mega\hertz} , \SI{333}{\mega\hertz} , \SI{500}{\mega\hertz} , \SI{600}{\mega\hertz} , \SI{1}{\giga\hertz} , \SI{2}{\giga\hertz}.
+    		\item Calcule la frecuencia para señales periódicas que tienen un período de: \SI{1}{\pico\second} , \SI{2}{\pico\second} , \SI{100}{\pico\second} , \SI{500}{\pico\second} , \SI{1}{\nano\second} , \SI{2}{\nano\second} , \SI{100}{\nano\second} , \SI{500}{\nano\second} , \SI{1}{\micro\second} , \SI{2}{\micro\second} , \SI{100}{\micro\second} , \SI{500}{\micro\second} ,\SI{1}{\milli\second} , \SI{2}{\milli\second} , \SI{100}{\milli\second} , \SI{500}{\milli\second} , \SI{1}{\second}.
+    		\item  El tiempo de propagación de una compuerta es de \SI{100}{\nano\second}. Indique cuál es la frecuencia
+    		máxima a la que puede operar dicha compuerta. Razone este punto pensando en el negador, ya
+    		que durante \SI{100}{\nano\second}s debe tener una entrada en un valor, luego pasar al otro por \SI{100}{\nano\second}
+    		nuevamente.
+    		\item  Calcule los márgenes de ruido para las siguientes familias de compuertas. Luego indique
+    		los márgenes de ruido para la interconexión entre las distintas familias, ej: Salida TTL5 Entrada
+    		ARD, Salida ARD Entrada TTL5, y así todas las combinaciones posibles. Se brindan ciertos
+    		valores de resultado como ejemplo. \\
+    		\begin{tabular}{|c|c|c|c|c|}
+    		\hline
+    		\rowcolor{headergray}
+    		Parámetro & TTL5 & ARD & CMOS3 & INV \\ \hline
+    		$Voh_{min}$ & $\SI{2,7}{\volt}$&$\SI{4,2}{\volt}$&$\SI{2,4}{\volt}$&$\SI{4,0}{\volt}$ \\ \hline
+    		$Vih_{min}$ & $\SI{2,0}{\volt}$&$\SI{3,0}{\volt}$&$\SI{2,0}{\volt}$&$\SI{2,0}{\volt}$ \\ \hline
+    		$Vol_{max}$ & $\SI{0,4}{\volt}$&$\SI{0,9}{\volt}$&$\SI{0,5}{\volt}$&$\SI{1,0}{\volt}$ \\ \hline
+    		$Vil_{max}$ & $\SI{0,8}{\volt}$&$\SI{1,5}{\volt}$&$\SI{0,8}{\volt}$&$\SI{3,0}{\volt}$ \\ \hline
+    	\end{tabular} \\
+    	Respuestas (algunas):
+    	\begin{itemize}
+    \item	Salida TTL5 Entrada TTL5, Vnh = 0,7V; Vnl=0,4V; Margen de ruido=0,4V.
+    \item	Salida ARD Entrada TTL5, Vhn=2,2V; Vnl=Invalido; No es compatible.
+    \item	Salida CMOS3 Entrada TTL5, Vhn=0,4V; Vnl=0,3V, Margen de ruido=0,3V.
+    \item	Salida TTL5 Entrada CMOS3, Vhn=0,7V; Vnl=0,4V, Margen de ruido=0,4V. (compare con la respuesta anterior).
+    \item	Salida INV Entrada INV, Familia inválida.
+    \end{itemize}
+    	\item  Calcule el factor de cargabilidad para las siguientes familias de circuitos integrados. \\
+    \begin{tabular}{|c|c|c|c|}
+    	\hline
+    	\rowcolor{headergray}
+    	Parámetro & A & B & C \\ \hline
+    	$Ioh_{max}$ & $\SI{2}{\milli\ampere}$&$\SI{2}{\milli\ampere}$&$\SI{2}{\milli\ampere}$ \\ \hline
+    	$Iih_{max}$ & $\SI{500}{\nano\ampere}$&$\SI{2}{\milli\ampere}$&$\SI{1000}{\micro\ampere}$ \\ \hline
+    	$Iol_{max}$ & $\SI{5}{\milli\ampere}$&$\SI{5}{\milli\ampere}$&$\SI{800}{\micro\ampere}$ \\ \hline
+    	$Iil_{max}$ & $\SI{1}{\milli\ampere}$&$\SI{500}{\micro\ampere}$&$\SI{1}{\milli\ampere}$ \\ \hline
+    \end{tabular} \\
+    Respuestas (algunas):
+    \begin{itemize}
+    	\item A → A Fan Out: 5 conexiones
+    	\item A → B Fan Out: 1 conexión 
+    \end{itemize}
+    \item Dada una compuerta alimentada con $\SI{5}{\volt}$, su consumo de corriente en bajo es de $\SI{1}{\milli\ampere}$ y
+    alto en $\SI{2}{\milli\ampere}$, calcule la potencia disipada media (PDM) a la salida siendo:
+    \begin{itemize}
+    	\item La salida constante en alto
+    	\item La salida constante en bajo \textit{Rta=$\SI{5}{\milli\watt}$}
+    	\item La salida es periódica con un ciclo de actividad de 50\%
+    	\item La salida es periódica con un ciclo de actividad de 25\% \textit{Rta=$\SI{6,25}{\milli\watt}$}
+    	\item La salida es periódica con un ciclo de actividad de $3/8$ del tiempo
+    	\item La salida es periódica con un ciclo de actividad de 100\% \textit{Rta=$\SI{10}{\milli\watt}$}
+    	\item La salida es periódica con un ciclo de actividad de 0\%
+    \end{itemize}
+    \begin{minipage}{.85\textwidth} 
+    	\item
+    	Calcule la PDM a la salida F de la siguiente compuerta siendo que la misma se encuentra
+    	alimentada con $\SI{5}{\volt}$, su consumo de corriente en bajo es $\SI{2}{\milli\ampere}$, en alto es $\SI{5}{\milli\ampere}$ y la entrada A
+    	tiene un ciclo de actividad del 50\%. \textit{Nota: Revise la tabla de verdad de AND. Rta=Pdl  }
+    \end{minipage}
+    \begin{minipage}{.90\textwidth}
+    	\begin{tikzpicture}
+    	% Paths, nodes and wires:
+    	\node[american and port] at (6.25, 8){};
+    	\node[shape=rectangle, minimum width=0.34cm, minimum height=0.59cm](N1) at (4.5, 8.313){} node[anchor=center] at (N1.text){$A$};
+    	\node[shape=rectangle, minimum width=0.34cm, minimum height=0.59cm](N2) at (4.5, 7.75){} node[anchor=center] at (N2.text){$0$};
+    	\node[shape=rectangle, minimum width=0.34cm, minimum height=0.59cm](N3) at (6.591, 8){} node[anchor=center] at (N3.text){$F$};
+    	\end{tikzpicture}
+    	\\
+    \end{minipage}
+    
+    \begin{minipage}{.85\textwidth} 
+   
+    	\item
+    	Calcule la PDM a la salida F de la siguiente compuerta siendo que la misma se encuentra
+    	alimentada con $\SI{5}{\volt}$, su consumo de corriente en bajo es $\SI{2}{\milli\ampere}$, en alto es $\SI{5}{\milli\ampere}$ y la entrada A
+    	tiene un ciclo de actividad del 50\%. \textit{Nota: Revise la tabla de verdad de OR. Rta=Pdh  }
+    \end{minipage}
+    \begin{minipage}{.90\textwidth}
+    	\begin{tikzpicture}
+    		% Paths, nodes and wires:
+    		\node[shape=rectangle, minimum width=0.34cm, minimum height=0.59cm](N1) at (4.5, 8.313){} node[anchor=center] at (N1.text){$A$};
+    		\node[shape=rectangle, minimum width=0.34cm, minimum height=0.59cm](N2) at (4.5, 7.75){} node[anchor=center] at (N2.text){$1$};
+    		\node[shape=rectangle, minimum width=0.34cm, minimum height=0.59cm](N3) at (6.5, 8.062){} node[anchor=center] at (N3.text){$F$};
+    		\node[american or port] at (6.136, 8.03){};
+    	\end{tikzpicture}
+    	\\
+    \end{minipage}
+    
+    \begin{minipage}{.85\textwidth} 
+    	
+    	\item
+    	Calcule la PDM a la salida F de la siguiente compuerta siendo que la misma se encuentra
+    	alimentada con $\SI{5}{\volt}$, su consumo de corriente en bajo es $\SI{2}{\milli\ampere}$, en alto es $\SI{5}{\milli\ampere}$ y la entrada A
+    	tiene un ciclo de actividad del 25\%. \textit{Nota: Revise la tabla de verdad de XOR, en particular cuando la entrada B es 1. La respuesta NO es $\SI{13,75}{\milli\watt}$ }
+    \end{minipage}
+    \begin{minipage}{.90\textwidth}
+    	\begin{tikzpicture}
+    		% Paths, nodes and wires:
+    		\node[shape=rectangle, minimum width=0.34cm, minimum height=0.59cm](N1) at (4.5, 8.313){} node[anchor=center] at (N1.text){$A$};
+    		\node[shape=rectangle, minimum width=0.34cm, minimum height=0.59cm](N2) at (4.5, 7.75){} node[anchor=center] at (N2.text){$1$};
+    		\node[shape=rectangle, minimum width=0.34cm, minimum height=0.59cm](N3) at (6.5, 8.062){} node[anchor=center] at (N3.text){$F$};
+    		\node[american xor port] at (6.159, 8.062){};
+    	\end{tikzpicture}
+    	\\
+    \end{minipage}
+    \item La familia de compuertas A (alimentada con $\SI{5}{\volt}$ ) posee los siguientes parámetros
+    estáticos. Si $D1$ tiene tensión de umbral ideal de $\SI{2}{\volt}$ , indique si es posible encontrar un valor de $R1$ que
+    asegure que circulen como mínimo $\SI{20}{\milli\ampere}$  por D1. En caso de encontrar el valor, indique el
+    mismo. En caso de ser imposible, indique el motivo. \textit{Rta= Imposible ($\SI{125}{\ohm}$  exceden $Ioh$)}\\
+    \begin{minipage}{.45\textwidth} 
+    	\begin{tikzpicture}
+    		% Paths, nodes and wires:
+    		\node[american not port] at (4.2, 8){};
+    		\draw (4.9, 8) to[american resistor, l_={$R1$}] (7, 8);
+    		\draw (7, 8) to[empty led, l_={$D1$}] (8, 8);
+    		\node[ground] at (8.5, 7.75){};
+    		\draw (8, 8) -- (8.5, 8) -| (8.5, 7.75);
+    		\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm](N1) at (4, 8){} node[anchor=center] at (N1.text){$A$};
+    	\end{tikzpicture}
+    \end{minipage}
+    \begin{minipage}{.25\textwidth}
+    	\begin{tabular}{|c|c|}
+    		\hline
+    		\rowcolor{headergray}
+    		Parámetro & A  \\ \hline
+    		$Voh_{min}$ & $\SI{4,5}{\volt}$ \\ \hline
+    		$Vol_{min}$ & $\SI{0,5}{\volt}$ \\ \hline
+    		$Ioh_{max}$ & $\SI{23}{\milli\ampere}$ \\ \hline
+    		$Iol_{max}$ & $\SI{40}{\milli\ampere}$ \\ \hline
+    	\end{tabular} \\
+    \end{minipage}
+    
+    \begin{minipage}{.70\textwidth}
+    	 \item La familia de compuertas A (alimentada con $\SI{5}{\volt}$ ) posee los siguientes parámetros
+    	estáticos. Si $D1$ tiene tensión de umbral ideal de $\SI{2}{\volt}$ , indique si es posible encontrar un valor de $R1$ que
+    	asegure que circulen como mínimo $\SI{20}{\milli\ampere}$  por D1. En caso de encontrar el valor, indique el
+    	mismo. En caso de ser imposible, indique el motivo. \textit{Rta=  $\SI{110}{\ohm}$}
+    	\\
+    	
+    \end{minipage}
+    \begin{minipage}{.40\textwidth}
+    	\begin{tabular}{|c|c|}
+    		\hline
+    		\rowcolor{headergray}
+    		Parámetro & A  \\ \hline
+    		$Voh_{min}$ & $\SI{4,5}{\volt}$ \\ \hline
+    		$Vol_{min}$ & $\SI{0,5}{\volt}$ \\ \hline
+    		$Ioh_{max}$ & $\SI{25}{\milli\ampere}$ \\ \hline
+    		$Iol_{max}$ & $\SI{40}{\milli\ampere}$ \\ \hline
+    	\end{tabular} \\
+    \end{minipage}
+    \begin{minipage}{.40\textwidth}
+    \begin{tikzpicture}
+    	% Paths, nodes and wires:
+    	\node[american not port] at (0.8, 7){};
+    	\draw (3, 7) to[american resistor, l={$R1$}] (5.1, 7);
+    	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm](N1) at (0.6, 7){} node[anchor=center] at (N1.text){$A$};
+    	\node[vcc](N2) at (5.6, 7.25){} node[anchor=south] at (N2.text){$5V$};
+    	\draw (5.6, 7.25) |- (5.1, 7);
+    	\draw (3, 7) to[empty led, l_={$D1$}] (1.5, 7);
+    \end{tikzpicture}
+	\end{minipage}
+   
+    	\end{enumerate}
+\end{document}
