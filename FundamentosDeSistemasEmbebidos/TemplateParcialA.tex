@@ -1,0 +1,169 @@
+\documentclass{article}
+\usepackage{tabularx}
+\usepackage{circuitikz}
+\usepackage[T1]{fontenc}
+\usepackage{multicol}
+\usepackage{siunitx}
+\sisetup{output-decimal-marker = {,}} %para que use coma en vez de punto
+\newlength{\spacelength}
+\settowidth{\spacelength}{\space} %para poner separaciones con espacios
+\setlength{\parindent}{0pt} %Saca la sangria inicial
+%Usamos tamaño oficio para que entren 3 examenes en landscape (apaisado)
+%De esta forma con 20 hojas tenemos 60 examenes (que miseria)
+\usepackage[legalpaper, landscape, margin=0.2in]{geometry} %pagina y margenes
+
+%Los ejercicios que aparecen en este template son copia de la guia de TP.
+%Obviamente en cada cuatrimestre cada curso va a recibir ejercicios distintos
+
+%%Modificar Materia, Parcial y Tema
+\newcommand{\MateriaCuatri}{FSE261C}
+\newcommand{\Parcial}{1PA}
+\newcommand{\Tema}{Tema A}
+
+%%Se define el header del parcial para 3 puntos
+\newcommand{\HeaderParcial}{
+\MateriaCuatri|\Parcial|\Tema\hspace{2\spacelength} \textbf{Fecha \space\space\space / \space\space / \hspace{2\spacelength} Com:\hspace{4\spacelength} Dni: \newline
+Apellido: \hspace{26\spacelength} Nombre: \newline \newline}
+\begin{tabular}{|c|p{1cm}|c|p{1cm}|c|p{1cm}|c|p{2cm}|}
+	\hline
+A&&B&&C&&¿Aprueba?& \\[0.4cm]
+ \hline
+\end{tabular}
+\textbf{Exprese los resultados en su unidad correcta en esta hoja.}
+}
+
+\newcommand{\PuntoA}{
+	A) Encuente los valores faltantes\\
+	\begin{minipage}{.70\linewidth}
+\begin{tikzpicture}[scale=0.9]
+	% Paths, nodes and wires:
+	\draw (6.75, 6.5) to[battery1, l_={$V1$}, label distance=0.01cm]  (6.75, 5.5);
+	\draw (9.75, 8) to[american resistor, l={$R1$}, label distance=0.02cm] (9.75, 6.5);
+	\draw (9.75, 5.5) to[american resistor, l={$R2$}, label distance=0.02cm] (9.75, 3.75);
+	\node[shape=circle, fill={rgb,255:red,0;green,0;blue,0}, draw, line width=1pt, inner sep=0, minimum width=0.215cm](Ellipse1) at (9.75, 6){} node[anchor=west] at ([xshift=0.12cm]Ellipse1.east){$Va$};
+	\draw (9.75, 6.5) -- (9.75, 5.5);
+	\draw (6.75, 6.5) -| (6.75, 8.5) -| (9.75, 8);
+	\draw (9.75, 3.75) -| (9.75, 3.5) |- (6.75, 3.25) -| (6.75, 5.5);
+	\draw[-Triangle] (7.0,6.5) -- (7.0,8) node[right,minimum size=1cm,pos=0.5 ]{$i1$};
+\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{.25\linewidth}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\begin{tabularx}{3cm}{|C|l|}
+	\hline
+	$V1$ & $\SI{10}{\volt}$ \\	\hline
+	$R1$ & $\SI{75}{\ohm}$ \\ \hline
+	$R2$ & $\SI{25}{\ohm}$  \\ \hline
+	$i1$ & \SI{100}{\milli\ampere}\\ \hline
+	$Va$ & \SI{7,5}{\volt}\\
+	\hline
+\end{tabularx}
+\end{minipage}
+}
+
+\newcommand{\PuntoB}{
+	B) Encuente los valores faltantes\\
+	\begin{minipage}{.70\linewidth}
+	\begin{tikzpicture}[scale=0.8]
+		% Paths, nodes and wires:
+		\draw (5.5, 7.75) to[battery1, l_={$V1$}] (5.5, 6.75);
+		\node[plain crossing] at (5, 7.64){};
+		\draw (7, 8) to[american resistor, l={$R1$}] (9, 8);
+		\draw (10, 8) to[american resistor, l={$R3$}] (12, 8);
+		\draw (8.5, 6.75) to[american resistor, l={$R2$}] (10.5, 6.75);
+		\node[circ] at (7, 8){};
+		\node[circ] at (9.5, 8){};
+		\node[circ] at (13, 8){};
+		\draw (5.5, 7.75) -| (5.5, 8) -- (7, 8);
+		\draw (9, 8) -- (9.5, 8);
+		\draw (10, 8) -- (9.5, 8);
+		\draw (8.5, 6.75) |- (7, 6.75) -| (7, 8);
+		\draw[-latex] (5.5, 8.25) -- (6.5, 8.25);
+		\draw[-latex] (10.75, 7) -- (11.75, 7);
+		\draw[-latex] (11.75, 8.25) -- (12.75, 8.25);
+		\draw (5.5, 6.75) -| (5.5, 5.5) -| (14, 8) |- (13, 8);
+		\draw (12, 8) -- (13, 8);
+		\draw (10.5, 6.75) -- (13, 6.75) -- (13, 8);
+		\node[shape=rectangle, minimum width=0.465cm, minimum height=0.715cm](N1) at (6, 8.5){} node[anchor=center] at (N1.text){$i1$};
+		\node[shape=rectangle, minimum width=0.465cm, minimum height=0.715cm](N2) at (11.25, 7.25){} node[anchor=center] at (N2.text){$i2$};
+		\node[shape=rectangle, minimum width=0.465cm, minimum height=0.715cm](N3) at (12.25, 8.5){} node[anchor=center] at (N3.text){$i3$};
+		\node[shape=rectangle, minimum width=0.465cm, minimum height=0.715cm](N4) at (9.5, 8.375){} node[anchor=center] at (N4.text){$Va$};
+	\end{tikzpicture}
+	\end{minipage}
+	\begin{minipage}{.25\linewidth}
+		\newcolumntype{C}{>{\centering\arraybackslash}X}
+		\begin{tabularx}{3cm}{|C|l|}
+			\hline
+			$V1$ & $\SI{10}{\volt}$ \\ \hline
+			$R1$ & $\SI{25}{\ohm}$ \\ \hline
+			$R2$ &  $\SI{75}{\ohm}$ \\ \hline
+			$R3$ &  $\SI{50}{\ohm}$ \\ \hline
+			$i1$ &  \SI{266,6}{\milli\ampere} \\ \hline
+			$i2$ &  \SI{133,3}{\milli\ampere}\\ \hline
+			$i3$ & \SI{133,4}{\milli\ampere}\\ \hline
+			$Va$ & \SI{6,6}{\volt}\\
+			\hline
+		\end{tabularx}
+	\end{minipage}
+}
+\newcommand{\PuntoC}{
+	C) Encuente los valores faltantes\\
+	\begin{minipage}{.70\linewidth}
+		\begin{tikzpicture}[scale=1.15]
+			% Paths, nodes and wires:
+			\draw (6, 7.75) to[battery1, l={$V1$}] (6, 6.75);
+			\node[plain crossing] at (6.25, 7.64){};
+			\draw (7, 8) to[american resistor, l={$R1$}] (9, 8);
+			\draw (9, 8) to[american resistor, l={$R2$}] (11, 8);
+			\draw (9, 8) to[american resistor, l_={$R3$}] (9, 6);
+			\draw[-latex] (6.25, 8.25) -- (7.25, 8.25);
+			\node[shape=rectangle, minimum width=0.465cm, minimum height=0.715cm](N1) at (6.75, 8.5){} node[anchor=center] at (N1.text){$i1$};
+			\node[shape=rectangle, minimum width=0.465cm, minimum height=0.715cm](N2) at (9, 8.25){} node[anchor=center] at (N2.text){$Va$};
+			\node[circ] at (9, 5.75){};
+			\node[circ] at (9, 8){};
+			\node[shape=rectangle, minimum width=0.465cm, minimum height=0.715cm](N3) at (11.25, 8.5){} node[anchor=center] at (N3.text){$i2$};
+			\node[shape=rectangle, minimum width=0.465cm, minimum height=0.715cm](N4) at (9.75, 6.625){} node[anchor=center] at (N4.text){$i3$};
+			\draw[latex-] (10.75, 8.25) -- (11.75, 8.25);
+			\draw[-latex] (9.5, 7) -| (9.5, 6.25);
+			\draw (12, 7.75) to[battery1, l_={$V2$}] (12, 6.75);
+			\node[plain crossing] at (11.75, 7.64){};
+			\draw (6, 7.75) -| (6, 8) -- (7, 8);
+			\draw (12, 7.75) |- (11, 8);
+			\draw (9, 5.75) -| (12, 6.75);
+			\draw (6, 6.75) -| (6, 5.75) -- (9, 5.75) -| (9, 6);
+		\end{tikzpicture}
+	\end{minipage}
+	\begin{minipage}{.25\linewidth}
+		\newcolumntype{C}{>{\centering\arraybackslash}X}
+		\begin{tabularx}{3cm}{|C|l|}
+			\hline
+			$V1$ & $\SI{10}{\volt}$ \\ \hline
+			$R1$ & $\SI{4}{\ohm}$ \\ \hline
+			$R2$ & $\SI{2}{\ohm}$\\ \hline
+			$R3$ & $\SI{2}{\ohm}$\\ \hline
+		    $V2$ & $\SI{5}{\volt}$ \\ \hline
+			$i1$ & $\SI{1,5}{\ampere}$\\ \hline
+			$i2$ & $\SI{500}{\milli\ampere}$\\ \hline
+			$i3$ & $\SI{2}{\ampere}$\\ \hline
+			$Va$ & $\SI{4}{\volt}$\\
+			\hline
+		\end{tabularx}
+	\end{minipage}
+}
+
+\newcommand{\Items}{
+	
+	\HeaderParcial \\
+	\PuntoA \\
+	\PuntoB \\
+	\PuntoC 
+}
+\begin{document}
+\def\arraystretch{1.5}
+ \begin{multicols}{3}	
+  \Items 
+  \Items  
+  \Items
+\end{multicols}
+
+\end{document}
