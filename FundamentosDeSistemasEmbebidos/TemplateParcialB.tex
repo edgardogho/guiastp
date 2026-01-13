@@ -1,0 +1,140 @@
+\documentclass{article}
+\usepackage{tabularx}
+\usepackage{circuitikz}
+\usepackage[T1]{fontenc}
+\usepackage{multicol}
+\usepackage{siunitx}
+\sisetup{output-decimal-marker = {,}} %para que use coma en vez de punto
+\newlength{\spacelength}
+\settowidth{\spacelength}{\space} %para poner separaciones con espacios
+\setlength{\parindent}{0pt} %Saca la sangria inicial
+%Usamos tamaño oficio para que entren 3 examenes en landscape (apaisado)
+%De esta forma con 20 hojas tenemos 60 examenes (que miseria)
+\usepackage[legalpaper, landscape, margin=0.2in]{geometry} %pagina y margenes
+
+%Los ejercicios que aparecen en este template son copia de la guia de TP.
+%Obviamente en cada cuatrimestre cada curso va a recibir ejercicios distintos
+
+%%Modificar Materia, Parcial y Tema
+\newcommand{\MateriaCuatri}{FSE261C}
+\newcommand{\Parcial}{1PB}
+\newcommand{\Tema}{Tema A}
+
+%%Se define el header del parcial para 3 puntos
+\newcommand{\HeaderParcial}{
+\MateriaCuatri|\Parcial|\Tema\hspace{2\spacelength} \textbf{Fecha \space\space\space / \space\space / \hspace{2\spacelength} Com:\hspace{4\spacelength} Dni: \newline
+Apellido: \hspace{26\spacelength} Nombre: \newline \newline}
+\begin{tabular}{|c|p{1cm}|c|p{1cm}|c|p{1cm}|c|p{2cm}|}
+	\hline
+A&&B&&C&&¿Aprueba?& \\[0.4cm]
+ \hline
+\end{tabular}
+\textbf{Exprese los resultados en su unidad correcta en esta hoja.}
+}
+
+\newcommand{\PuntoA}{
+	A) Encuente los valores faltantes\\
+	\begin{minipage}{.55\linewidth}
+	\begin{tikzpicture}
+	% Paths, nodes and wires:
+	\draw (7, 8) to[battery1, l_={$V1$}] (7, 7);
+	\node[plain crossing] at (6.75, 7.86){};
+	\draw (9, 9) to[american resistor, l_={$R1$}] (9, 7);
+	\draw (9, 6.5) to[american resistor, l_={$R2$}] (9, 4.5);
+	\draw (11.25, 6.5) to[empty led, l_={$D1$}] (11.25, 4.5);
+	\node[circ] at (9, 6.75){};
+	\node[circ] at (9, 4){};
+	\draw (7, 8) -| (7, 9) -- (9, 9);
+	\draw (9, 7) -| (9, 6.75);
+	\draw (9, 6.5) -| (9, 6.75);
+	\draw (11.25, 6.5) |- (9, 6.75);
+	\draw (9, 4.5) -| (9, 4);
+	\draw (11.25, 4.5) |- (9, 4);
+	\draw (9, 4) |- (7, 4) -| (7, 7);
+	\draw[-latex] (7.5, 9.25) |- (8.75, 9.25);
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](N1) at (8, 9.5){} node[anchor=center] at (N1.text){$i1$};
+	\draw[-latex] (9.5, 6) -- (9.5, 5);
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](N2) at (9.75, 5.5){} node[anchor=center] at (N2.text){$i2$};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](N3) at (10.25, 7.25){} node[anchor=center] at (N3.text){$i3$};
+	\draw[-latex] (9.75, 7) |- (11, 7);
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](N4) at (8.625, 6.75){} node[anchor=center] at (N4.text){$Va$};
+\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{.25\linewidth}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\begin{tabularx}{4cm}{|l|C|}
+	\hline
+	$V1$ & $\SI{5}{\volt}$ \\	\hline
+	$R1$ & $\SI{100}{\ohm}$ \\ \hline
+	$P_{R1}$ & $\SI{90}{\milli\watt}$ \\ \hline
+	$R2$ & $\SI{400}{\ohm}$  \\ \hline
+	$i1$ & \SI{30}{\milli\ampere}\\ \hline
+	$i2$ & \SI{5}{\milli\ampere}\\ \hline
+	$i3$ & \SI{25}{\milli\ampere}\\ \hline
+	$Va$ & \SI{2}{\volt}\\ \hline
+	$V_{D1}$ & \SI{2}{\volt}\\
+	\hline
+\end{tabularx}
+\end{minipage}
+}
+
+\newcommand{\PuntoB}{
+	B) %Encuente los valores faltantes\\
+	\\
+	\begin{minipage}{.70\linewidth}
+	Calcule la PDM a la salida F de la siguiente compuerta siendo que la misma se encuentra
+	alimentada con $\SI{5}{\volt}$, su consumo de corriente en bajo es $\SI{2}{\milli\ampere}$, en alto es $\SI{5}{\milli\ampere}$ y la entrada A
+	tiene un ciclo de actividad del 25\%. 
+	\\ Respuesta= \\ \\ \\
+	\end{minipage}
+	\begin{minipage}{.25\linewidth}
+			\begin{tikzpicture}
+			% Paths, nodes and wires:
+			\node[shape=rectangle, minimum width=0.34cm, minimum height=0.59cm](N1) at (4.5, 8.313){} node[anchor=center] at (N1.text){$A$};
+			\node[shape=rectangle, minimum width=0.34cm, minimum height=0.59cm](N2) at (4.5, 7.75){} node[anchor=center] at (N2.text){$1$};
+			\node[shape=rectangle, minimum width=0.34cm, minimum height=0.59cm](N3) at (6.5, 8.062){} node[anchor=center] at (N3.text){$F$};
+			\node[american xor port] at (6.159, 8.062){};
+		\end{tikzpicture}
+	\\
+	\end{minipage}
+}
+\newcommand{\PuntoC}{
+	C) \\
+	%\begin{minipage}{.50\linewidth}
+	Se desea conectar la salida de una compuerta tipo TTL5 a una entrada de una compuerta tipo CMOS3. Indique los márgenes de ruido y defina si es posible realizar la conexión o no.\\
+
+	%\end{minipage}
+	\begin{minipage}{.5\linewidth}
+			\begin{tabular}{|c|c|c|}
+			\hline
+			Parámetro & TTL5 & CMOS3 \\ \hline
+			$Voh_{min}$ & $\SI{2,7}{\volt}$&$\SI{2,4}{\volt}$ \\ \hline
+			$Vih_{min}$ & $\SI{2,0}{\volt}$&$\SI{2,0}{\volt}$ \\ \hline
+			$Vol_{max}$ & $\SI{0,4}{\volt}$&$\SI{0,5}{\volt}$ \\ \hline
+			$Vil_{max}$ & $\SI{0,8}{\volt}$&$\SI{0,8}{\volt}$ \\ \hline
+		\end{tabular} \\
+	\end{minipage}
+\begin{minipage}{0.5\textwidth}
+	
+$V_{NH}=$\\ \\
+$V_{NL}=$\\ \\
+¿Es posible realizar la conexión? \\
+\end{minipage}
+}
+
+\newcommand{\Items}{
+	
+	\HeaderParcial \\
+	\PuntoA \\
+	\PuntoB \\
+	\PuntoC 
+}
+\begin{document}
+\def\arraystretch{1.7}
+ \begin{multicols}{3}	
+  \Items 
+  \Items  
+  \Items
+\end{multicols}
+
+\end{document}
