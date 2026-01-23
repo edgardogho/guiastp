@@ -457,14 +457,14 @@
 				
 			\end{tikzpicture}
 		}
-		\item Escriba las siguientes funciones en forma canónica:
+		\item Escriba las siguientes funciones en forma primera forma canónica:
 		\begin{itemize}
 		
 		\item $F(A,B,C,D)=\overline{A}.B+A.B.\overline{D}$ 
 		\item $F(A,B,C,D)=B.\overline{D}+\overline{A}.B.D$
 			
 		\end{itemize}
-		\item Dadas 4 variables de entrada $(A,B,C,D)$, utilizando logisim-evolution, haga la implementación de 7 funciones de salida (FA,FB,FC,FD,FE,FF,FG). Utilice en cada caso la forma simplificada mas conveniente (suma de productos o producto de sumas). Cada función $F_{x}$ debe tener una entrada de 4 bits llamada $ABCD$ y una salida $SieteX$ de un bit como se ve en la imagen. \\
+		\item Dadas 4 variables de entrada $(A,B,C,D)$, utilizando logisim-evolution, haga la implementación de 7 funciones de salida (FA,FB,FC,FD,FE,FF,FG). Utilice en cada caso la forma simplificada mas conveniente (suma de productos o producto de sumas). Cada función $F_{x}$ debe tener una entrada de 4 bits llamada $ABCD$ y una salida $SieteX$ de un bit como se ve en la imagen. Utilice separadores (splitters) para juntar o separar conjuntos de bits. \\
 		\begin{minipage}{0.6\textwidth}
 			
 		
@@ -1110,7 +1110,7 @@
 		\fill [line width=1.0pt, custcol_0_0_0]  (399.0,65.0) ellipse (2.0 and 2.0 );
 		\fill [line width=1.0pt, custcol_28_28_ff]  (419.0,65.0) ellipse (2.0 and 2.0 );
 		\end{tikzpicture}}
-	\item Implementar en logisim-evolution un sumador de dos números BCD. Como entrada tiene los números A ($A_{3}A_{2}A_{1}A_{0}$) y  B ($B_{3}B_{2}B_{1}B_{0}$). Como salida posee dos dígitos BCD. \textit{Nota: pruebe las combinaciones que generan un uno en el dígito más significativo, como por ejemplo 9+9=18. Solo acepta dígitos válidos en BCD.}
+	\item Implementar en logisim-evolution un sumador de dos números BCD. Como entrada tiene los números A ($A_{3}A_{2}A_{1}A_{0}$) y  B ($B_{3}B_{2}B_{1}B_{0}$). Como salida posee dos dígitos BCD. \textit{Nota: pruebe las combinaciones que generan un uno en el dígito más significativo, como por ejemplo 9+9=18. Solo considere dígitos válidos en BCD.}
 	\\
 	\resizebox{!}{5cm} { 
 		\begin{tikzpicture}[x=1pt,y=-1pt,line cap=rect]
@@ -1358,7 +1358,7 @@
 				\logisimfontA{\fontsize{16pt}{16pt}\fontseries{bx}\selectfont\node[inner sep=0, outer sep=0, custcol_0_0_ff, anchor=base west] at  (501.0,112.0)  {Resta};}
 				\fill [line width=2.0pt, custcol_0_0_0]  (429.0,105.0) ellipse (2.0 and 2.0 );
 				\end{tikzpicture}}
-				\item Implementar en logisim-evolution un circuito que genere el complemento a la base de un número de 4 bits \textbf{SOLO} si el número es negativo (o sea su bit más significativo esta en uno). En dicho caso debe generar un uno en la salida de signo. \textit{Nota: utilice un display hexadecimal para el número y un display siete segmentos para el signo en caso de ser negativo. En el caso que el número sea positivo o cero el signo no se enciende.}
+				\item Implementar en logisim-evolution un circuito que genere el complemento a la base de un número de 4 bits \textbf{si y SOLO si} el número es negativo (o sea su bit más significativo esta en uno). En dicho caso debe generar un uno en la salida de signo. \textit{Nota: utilice un display hexadecimal para el número y un display siete segmentos para el signo en caso de ser negativo. En el caso que el número sea positivo o cero el signo no se enciende.}
 			\\
 			\resizebox{!}{9cm} { 
 				\begin{tikzpicture}[x=1pt,y=-1pt,line cap=rect]
@@ -1763,9 +1763,9 @@
 				\item  A!=B si A-B != 0
 				\item  A < B si SignoResultado XOR Overflow = 1
 				\item  A >=B si SignoResultado XNOR Overflow = 1
-				\item  Overflow en la resta cuando el signo del minuendo y el sustraendo es distinto y el resultado tiene el signo opuesto al minuendo.
+				\item  Overflow se produce en la resta cuando el signo del minuendo y el sustraendo es distinto y el resultado tiene el signo opuesto al minuendo.
 			\end{itemize}
-			\item Implemente un circuito en logisim-evolution llamado DesplazaDerecha. El mismo posee una entrada de 4 bits llamada Dato y otra entrada cd 2 bits llamada Cantidad. La salida del circuito son 4 bits llamados Salida. La siguiente tabla describe el funcionamiento del circuito que desplaza a la derecha el Dato según el valor de Cantidad.\textit{Nota: Tenga en cuenta que existen 4 valores de salida posible, que son 4 formas distintas de tomar el dato y completar con ceros a la izquierda. Utilice un MUX para seleccionar la forma correcta.} \\
+			\item Implemente un circuito en logisim-evolution llamado DesplazaDerecha. El mismo posee una entrada de 4 bits llamada Dato y otra entrada de 2 bits llamada Cantidad. La salida del circuito son 4 bits llamados Salida. La siguiente tabla describe el funcionamiento del circuito que desplaza a la derecha el Dato según el valor de Cantidad. \textit{Nota: Tenga en cuenta que existen 4 valores de salida posible, que son 4 formas distintas de tomar el dato y completar con ceros a la izquierda. Utilice un MUX para seleccionar la forma correcta.} \\
 			\begin{minipage}{0.35\textwidth}
 				
 				\begin{tabular}{|c|c|c|}
@@ -1835,7 +1835,7 @@
 					\fill [line width=2.0pt, custcol_0_0_0]  (75.0,36.0) ellipse (2.0 and 2.0 );
 				\end{tikzpicture} }
 			\end{minipage}
-				\item Implemente un circuito en logisim-evolution llamado DesplazaDerechaAritmetico. El mismo posee una entrada de 4 bits llamada Dato y otra entrada cd 2 bits llamada Cantidad. La salida del circuito son 4 bits llamados Salida. La siguiente tabla describe el funcionamiento del circuito que desplaza a la derecha el Dato según el valor de Cantidad.\textit{Nota: Tenga en cuenta que el valor del bit 'a' de la entrada se repite a diferencia del circuito anterior donde se completaba con ceros} \\
+				\item Implemente un circuito en logisim-evolution llamado DesplazaDerechaAritmetico. El mismo posee una entrada de 4 bits llamada Dato y otra entrada de 2 bits llamada Cantidad. La salida del circuito son 4 bits llamados Salida. La siguiente tabla describe el funcionamiento del circuito que desplaza a la derecha el Dato según el valor de Cantidad. \textit{Nota: Tenga en cuenta que el valor del bit 'a' de la entrada se repite a diferencia del circuito anterior donde se completaba con ceros} \\
 			\begin{minipage}{0.35\textwidth}
 				
 				\begin{tabular}{|c|c|c|}

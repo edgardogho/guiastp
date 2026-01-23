@@ -42,6 +42,9 @@
 \usepackage{booktabs}
 \usepackage{tikz-timing}
 \usepackage{url}
+\usepackage{fancyvrb}
+\usepackage{fvextra}
+\usepackage[implicit=false]{hyperref}
 
 \definecolor{headergray}{RGB}{220,220,220}
 \usepackage{geometry}
@@ -135,48 +138,76 @@
 	\def\arraystretch{1.2}
 	
 	\section*{B- Semiconductores}
-	\begin{adjustwidth}{-20pt}{-20pt}
+	\begin{adjustwidth}{-25pt}{-20pt}
 		\begin{tcolorbox}[enhanced,attach boxed title to top center={yshift=-3mm,yshifttext=-1mm},
 			colback=black!5!white,colframe=white!75!black,colbacktitle=red!80!black,
 			title= Diodo Ideal vs Diodo Real , fonttitle=\bfseries,
 			boxed title style={size=small,colframe=white,colback=black} ]
-			Dado que cada diodo tiene una curva que describe su funcionamiento, cada ejercicio indica si se utiliza un diodo real o un diodo ideal. Los ejercicios que se refieren al diodo ideal de 2V utilizan el siguiente subcircuito visto en la teoría. A continuación dejamos el texto del subcircuito para el simulador Falstad, que puede importarse en  File > Import From Text , y luego una vez importado File > Create Subcircuit para poder incluirlo en Draw > Subcircuit.
+			Dado que cada diodo tiene una curva que describe su funcionamiento, en cada ejercicio se indica si se utiliza un diodo real o un diodo ideal. Los ejercicios que se refieren al diodo ideal de 2V utilizan el siguiente subcircuito visto en la teoría. A continuación dejamos el texto del subcircuito para el simulador Falstad, que puede importarse en  File > Import From Text , y luego una vez importado File > Create Subcircuit para poder incluirlo en Draw > Subcircuit.
 			\begin{lstlisting}
-$ 1 0.000005 10.20027730826997 50 5 50 5e-11
-207 320 48 320 16 4 Anodo
-207 464 32 464 64 4 Catodo
-178 368 48 432 48 6 1 0.2 0.05000000004999653 0.05 1000000 0.02 20 0.015 0.005 1
-v 368 48 320 48 0 0 40 2 0 0 0.5
-R 368 80 336 80 0 0 40 2 0 0 0.5
-401 368 128 432 128 1 8\s15\s-15\s1000000\s4.661160346586257e-12\s2\s100000 2\s20\s10000000000\s2.5 1\s0
-x 278 178 538 181 4 24 Diodo\sIdeal\sSimulado\s2V
-w 432 80 432 128 0
-w 368 112 368 80 0
-w 368 144 320 144 0
-w 320 144 320 48 0
-w 464 32 432 32 0
+$ 65 0.000005 10.20027730826997 50 5 50 5e-11
+207 240 112 240 80 4 Anodo
+207 240 144 240 176 4 Catodo
+a 320 128 384 128 9 15 -15 1000000 0.9999699751152668 0.999989974715225 100000
+178 432 32 512 32 6 1 0.2 1.9990001103309396e-10 0.05 1000000 0.02 20 0.015 0.005 0
+v 240 144 208 144 0 0 40 2 0 0 0.5
+R 432 80 400 80 0 0 40 1.999 0 0 0.5
+401 432 112 512 112 1 8\s15\s-15\s1000000\s1.9999599958175907\s1.999\s100000 2\s20\s10000000000\s2.5 1\s0
+r 320 176 384 176 0 10000000
+r 320 112 240 112 0 10000000
+r 320 144 240 144 0 10000000
+w 320 176 320 144 0
+w 384 176 384 128 0
+r 320 80 384 80 0 10000000
+w 320 80 320 112 0
+g 384 80 384 96 0 0
+w 432 64 432 80 0
+w 432 96 432 80 0
+w 512 112 512 64 0
+w 240 112 208 112 0
+w 208 112 208 32 0
+w 432 128 384 128 0
+w 208 32 432 32 0
+w 208 144 208 192 0
+w 208 192 528 192 0
+w 528 192 528 16 0
+w 528 16 512 16 0
+
 				\end{lstlisting}
 				\begin{tikzpicture}
 					% Paths, nodes and wires:
-					\node[op amp] at (7.083, 5.789){};
-					\node[spdt, yscale=-1] at (7, 8.5){};
-					\draw (5.095, 8.5) to[battery1, l={$2v$}] (5.75, 8.5);
-					\draw (6, 7.25) to[cute inductor] (7.75, 7.25);
-					\node[vcc](N1) at (5.5, 7.25){} node[anchor=east] at (N1.west){$2v$};
-					\node[circ] at (5.5, 7.25){};
-					\draw (6, 7.25) -- (5.5, 7.25);
-					\node[squarepole](N2) at (4.25, 8.5){} node[anchor=south] at (N2.north){$Anodo$};
-					\node[squarepole](N3) at (8.5, 8.5){} node[anchor=north] at (N3.south){$Catodo$};
-					\draw (7.595, 8.815) -| (8.5, 8.75) -| (8.5, 8.5);
-					\node[circ] at (4.5, 8.5){};
-					\draw (6.405, 8.5) -- (5.75, 8.5);
-					\node[shape=rectangle, draw, line width=1pt, dash pattern={on 4pt off 4pt}, minimum width=1.215cm, minimum height=1.965cm] at (6.875, 8){};
-					\draw (5.893, 6.279) -| (5.5, 7.25);
-					\draw (7.75, 7.25) -| (8.273, 5.789);
-					\draw (5.893, 5.299) -| (4.5, 8.5);
-					\node[shape=rectangle, minimum width=0.965cm, minimum height=0.965cm](N4) at (7.25, 5.75){} node[anchor=center] at (N4.text){$\geq ?$};
-					\draw (5.095, 8.5) -- (4.5, 8.5);
-					\draw (4.5, 8.5) -- (4.25, 8.5);
+					\node[squarepole] at (3.25, 7.5){};
+					\node[squarepole] at (3.25, 5.5){};
+					\node[op amp, yscale=-1] at (7.083, 6.539){};
+					\draw (4, 7) to[american resistor] (5.893, 7.029);
+					\draw (5.833, 8.039) to[american resistor] (7.833, 8.039);
+					\node[ground] at (7.833, 8.039){};
+					\node[circ] at (5.833, 7.039){};
+					\draw (5.833, 8.039) -| (5.833, 7.039);
+					\draw (4, 6) to[american resistor] (5.893, 6.049);
+					\node[circ] at (5.833, 6.039){};
+					\draw (5.833, 5.039) to[american resistor] (8.333, 5.039);
+					\draw (5.833, 5.039) -| (5.833, 6.039);
+					\draw (8.333, 6.539) -- (8.333, 5.039);
+					\node[circ] at (4, 7){};
+					\node[circ] at (4, 6){};
+					\node[spdt, yscale=-1] at (9.905, 9.435){};
+					\draw (10.5, 9.75) to[battery1] (11.405, 9.75);
+					\node[shape=rectangle, minimum width=0.965cm, minimum height=0.715cm](N1) at (3.25, 7.875){} node[anchor=center] at (N1.text){$Anodo$};
+					\node[shape=rectangle, minimum width=0.965cm, minimum height=0.715cm](N2) at (3.25, 5.125){} node[anchor=center] at (N2.text){$Catodo$};
+					\draw (8.595, 8.25) to[cute inductor] (11.095, 8.25);
+					\node[vcc](N3) at (8.655, 8.25){} node[anchor=east] at ([xshift=0.18cm]N3.west){$2V$};
+					\node[op amp](N4) at (9.845, 7){} node[anchor=east] at ([xshift=-0.62cm]N4.east){$\geq?$};
+					\node[circ] at (8.655, 8.25){};
+					\draw (8.655, 7.49) |- (8.595, 8.25);
+					\draw (11.095, 7) -| (11.095, 8.25);
+					\node[shape=rectangle, draw, line width=1pt, dash pattern={on 4pt off 4pt}, minimum width=1.215cm, minimum height=1.965cm] at (9.875, 9){};
+					\node[circ] at (8.333, 6.539){};
+					\draw (8.655, 6.51) -| (8.333, 6.539);
+					\draw (4, 7) -| (3.25, 7.5);
+					\draw (4, 6) |- (3.25, 6) -| (3.25, 5.5);
+					\draw (11.405, 9.75) |- (4, 4.5) -| (4, 6);
+					\draw (9.31, 9.435) -| (4, 7);
 				\end{tikzpicture}
 				\\ Recuerde que esto \textbf{NO ES UN DIODO} sino un subcircuito creado para "simular" un diodo ideal ya que el mismo no existe.
 		\end{tcolorbox}
@@ -217,7 +248,7 @@ w 464 32 432 32 0
 			
 		\end{tabular}
 		\\
-		\item Dado el circuito del punto \ref{diodobasico} el diodo $D1$ equivale al 1N4004 (diodo real). Encuentre los valores faltantes en la tabla. \textit{Nota: tenga en cuenta que al ser un diodo real, su tensión de umbral (D1) va a depender de la corriente que circula por el mismo, por ende no desprecie decimales para que los valores calculados se acerquen lo mas posible a la simulación.}
+		\item Dado el circuito del punto \ref{diodobasico} el diodo $D1$ equivale al 1N4004 (diodo real). Encuentre los valores faltantes en la tabla. \textit{Nota: tenga en cuenta que al ser un diodo real, su tensión de umbral (D1) va a depender de la corriente que circula por el mismo, por ende no desprecie decimales para que los valores calculados se acerquen lo mas posible a la simulación.} \label{b2}
 		\\
 		\begin{tabular}{|c|c|c|c|c|c|c|c|}
 			\hline
@@ -273,7 +304,7 @@ w 464 32 432 32 0
 	
 	
 		\begin{enumerate}[label=\textbf{B.\arabic*},resume]	
-		\item Utilizando el circuito del punto \ref{diodoarriba}, reemplace el diodo ideal por un diodo real (default-led en Falstad). Encuentre los valores que faltan en la tabla. 
+		\item Utilizando el circuito del punto \ref{diodoarriba}, reemplace el diodo ideal por un diodo real (default-led en Falstad). Encuentre los valores que faltan en la tabla. \label{b4}
 		\\
 		\begin{tabular}{|c|c|c|c|c|c|c|c|}
 			\hline
@@ -290,7 +321,7 @@ w 464 32 432 32 0
 		\begin{minipage}{.55\textwidth} 
 			\item
 			
-			Dado el siguiente circuito complete los valores que faltan en la tabla. Utilice el diodo ideal simulado de 2V para cada LED $Dx$. Para cada una de las resistencias encuentre la potencia. \\
+			Dado el siguiente circuito complete los valores que faltan en la tabla. Utilice el diodo ideal simulado de 2V para cada LED $Dx$. Para cada una de las resistencias encuentre la potencia. \\ \label{b5}
 			
 		\end{minipage}
 		\begin{minipage}{.2\textwidth}
@@ -397,7 +428,7 @@ w 464 32 432 32 0
 			
 		\end{tabular}
 		\\
-		\item En el circuito del punto \ref{doblefuente} se invierte el LED $D2$, es decir que ahora su ánodo se encuentra conectado a $Va$ y su cátodo se encuentra conectado a $R2$. El resto se mantiene igual (sentido de corrientes, polaridad de fuentes, etc). Encuentre los valores que faltan en la tabla.\\
+		\item En el circuito del punto \ref{doblefuente} se invierte el LED $D2$, es decir que ahora su ánodo se encuentra conectado a $Va$ y su cátodo se encuentra conectado a $R2$. El resto se mantiene igual (sentido de corrientes, polaridad de fuentes, etc). Encuentre los valores que faltan en la tabla.\\ \label{doblefuente2}
 		\begin{tabular}{|c|c|c|c|c|c|c|c|}
 			\hline
 			\rowcolor{headergray}
@@ -410,7 +441,7 @@ w 464 32 432 32 0
 			\item
 			
 			Dado el siguiente circuito complete los valores que faltan en la tabla. Utilice el diodo ideal simulado de 2V para el LED $D1$. \textit{Nota: El valor de tensión en el punto $Va$ es particularmente importante en este ejercicio. Analice el circuito considerando a priori que el diodo $D1$ no es presente. Al encontrar $Va$ se debe cumplir entonces que $Va\geq2V$ para que $D1$ se encuentre polarizado en directa venciendo el umbral. Luego si eso ocurre, al existir del diodo el valor de $Va$ va a estar forzado en 2V por el diodo } \\
-			
+			\label{b8}
 		\end{minipage}
 		\begin{minipage}{.2\textwidth}
 			\begin{tikzpicture}
@@ -460,12 +491,12 @@ w 464 32 432 32 0
 		\begin{minipage}{.60\textwidth} 
 			\item
 			
-			Dado el siguiente circuito complete los valores que faltan en la tabla. El diodo $D1$ equivale al diodo simulado de 2V mientras que $D2$ equivale a default-led.\\
+			Dado el siguiente circuito complete los valores que faltan en la tabla. El diodo $D1$ equivale al diodo simulado de 2V mientras que $D2$ equivale a default-led.\\ \label{b9}
 			\begin{tabular}{|c|c|c|c|c|c|}
 				\hline
 				\rowcolor{headergray}
 				${V1 }$&${R1 }$&${Va }$&${i1 }$&${i2 }$&${i3 }$ \\ \hline
-				$\SI{5}{\volt}$&$\SI{320}{\ohm}$&$\SI{1,785}{\milli\volt}$&$\SI{10}{\milli\ampere}$&$\SI{0}{\milli\ampere}$&$\SI{10}{\milli\ampere}$ \\ \hline
+				$\SI{5}{\volt}$&$\SI{320}{\ohm}$&$\SI{1,785}{\milli\volt}$&$\SI{10}{\milli\ampere}$&$\SI{10}{\milli\ampere}$&$\SI{0}{\milli\ampere}$ \\ \hline
 				$\SI{5}{\volt}$&$\SI{640}{\ohm}$&$\SI{1,72}{\milli\volt}$&&& \\ \hline
 				
 				
@@ -504,7 +535,7 @@ w 464 32 432 32 0
 	\begin{minipage}{.60\textwidth} 
 		\item
 		
-		Dado el siguiente circuito complete los valores que faltan en la tabla. El diodo $D1$ equivale al diodo simulado de 2V mientras que $D2$ y $D3$ equivale a default-led.\\
+		Dado el siguiente circuito complete los valores que faltan en la tabla. El diodo $D1$ equivale al diodo simulado de 2V mientras que $D2$ y $D3$ equivale a default-led.\\ \label{b10}
 		\begin{tabular}{|c|c|c|c|c|c|}
 			\hline
 			\rowcolor{headergray}
@@ -553,7 +584,7 @@ w 464 32 432 32 0
 			apagado el ingreso está impedido. Los guardias informan su disponibilidad presionando
 			botones en el circuito. El guardia uno presiona $S1$ y el guardia dos presiona $S2$. Considerando
 			que ambos guardias tienen que estar presentes, ¿cuál de los siguientes circuitos cumple con la
-			política del banco? \textit{Nota: Los switches son normales abiertos.}\\
+			política del banco? \textit{Nota: Los switches son normales abiertos.}\\ \label{b11}
 			\begin{tikzpicture}
 				% Paths, nodes and wires:
 				\draw (6, 9) to[push button, l={$S1$}] (6, 7);
@@ -1252,4 +1283,94 @@ w 464 32 432 32 0
 	\end{minipage}
    
     	\end{enumerate}
+    	\clearpage
+    	\section*{Apéndice - Circuitos}
+    	\begin{tcolorbox}[enhanced,attach boxed title to top center={yshift=-3mm,yshifttext=-1mm},
+    		colback=black!5!white,colframe=white!75!black,colbacktitle=red!80!black,
+    		title= Simulador Falstad , fonttitle=\bfseries,
+    		boxed title style={size=small,colframe=white,colback=black} ]
+    		En este apéndice dejamos los circuitos utilizados en los ejercicios de ejemplo para que puedan importarse en el simulador Falstad. En algunos casos queda el link en el PDF, otros pueden importarse como texto. A tal fin, vaya a la opción File > Import from Text, y copie y pegue el texto de cada ejercicio.
+    	\end{tcolorbox}
+    
+    	\begin{itemize}
+    		\item  
+    		%\begin{adjustwidth}{0pt}{-20pt}
+    			
+
+\href{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKADcLiURs1PuUKACxRRQ2qKowELbBlpcQgkQkVhCVbJJYAnEPJHqqBpcNG5ILAA768hjbZHKek5PHizCefqZUPnUiwA7j5G+pD2gSEmYRh24A6WNnFOZik8fFpSbu6W0CAAIgCWAPYAJiUAkmV0AIYANigAauBKbdwAggB25SWt2QDCtQAuvW1UEADyVh0AtlYAovWzADoAztjrQusIKzoASnT1tQCeS6trYOuE6xjreOvEe00l9cO1AOZ05+so13v7WpFeo-NYPHQDErzWo6EYlHSgh5rXZrJ4HOhrIprUYI5brTbIgEYrE40HbS5EzHY+Gggl-dFU0l4tbkqhPdZgXbrJhcy65SArdYwUikEhkBDMBBELyCtbCkV4UgYIQYTmCXlgXL-Dmy1CysDQEXwZiQbC4YjYYiERia3WwDX8u2QP6-AVC2Ccp2QXkCuW62XiWUuv1Cu0ot0hlkRg0i-2h90oq73QX6rmynkpjmOlOXQ0i1SkBB4MAYVSQO45mOkTN89xBmtoGua-nwBvQDU133Rlvx2tayPN-vd-ksISakCEDACBCEcIiXCGQqlCrVOqNFpPS4ojN91u5+CCQtyIRECIc2DoISFvDYMeTvBIwdwCc6uXQP65o1wE1myAWq02l29pZkOsAfo2b6QJ6kHekKUChlGvwIUBSBdlsvpVpuaFvkgVxgqm6aeiBda-BeEQFuWQh4FK+D6nm7K7r6waNsRPakYmurwYxz4YS2XFPvA-EtsEjgZMYERiVAInpM4JgBNJEm8Ao3BKVJ2BeKJzjFrOzgQFQTS1CwQA}{\ref{diodobasico}}
+	
+    		%\end{adjustwidth}
+    		\item \href{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKADcRD8Rs8AWTt2xooovrVFUYCFtgxUueHiMUgU4npJYAnTniXqF+tcaq5ILAO6CDGwscNQrepbwGq3T7PZAYEKEyUMfkDwUQA1AENnPwCUY3sDUxYAB19-NQ1Y0OxJZHh4GIzHRMypFgATF1DSzwCwADlxSD4WIA}{\ref{b2}} \\
+    		\begin{adjustwidth}{-100pt}{-20pt}
+    			\begin{lstlisting}
+    			$ 1 0.000005 10.20027730826997 50 5 50 5e-11
+    			v 608 384 608 320 0 0 40 5 0 0 0.5
+    			370 608 320 608 240 3 0 0
+    			r 688 240 688 288 0 300
+    			w 608 240 688 240 0
+    			w 688 384 608 384 0
+    			368 752 288 784 288 1 0 Va
+    			w 752 288 688 288 0
+    			p 752 240 752 288 3 0 0 10000000
+    			w 752 240 688 240 0
+    			d 688 288 688 384 2 1N4004
+    			\end{lstlisting}
+    		\end{adjustwidth}
+    			\item 
+    		\href{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKGwysP3C5A4BYeVbFCgsATn0iCUCQlMHY0osJRYAHPnkFheGbSFnyRVKmHgWWAdwVCtO3pA33Dcl0uGizF+C2ggAEQBLAHsAExCASTC6AEMAGxQANXBDNJQQAEEAO3CQ1NMQAGFYgBc8tLMQAHl1TIBbdQBRePqAHQBnbE7+ToQ28QAlOnjYgE8W9o6wTsJOjE68TuIBpJD40tiAczpJzpRZgcHYoPi9jqXxIpDG2PEykPFzpY7+jpWhug6gjvKn1s63VeRy+Pz+5160xB31+j3OQIOnxh4IBHUhVBWnVUbU6TH6WJ8kBxHRgpFIJDICGYCCIhCWnVJZLwpAw-AwqhQsmJ5gshyxxNQ3OgZPgzEg2FwxGwxEIjHMAtg+OmhIVkAO+yJDNg2K1iAFDP1PU1HXVJMNJOgb2Nxv4xrAwtI5utlv5ixx3PxxLx7oJPh90wdpAQZIQeDAGGDkAW7oDZP9PPgxPVSc13MJvJjKBdrv1Zt9frzypVhYTvJL6ZY-HMIEIGAyYGIGQEhltqWCeWicUSKRW0ze3qLZaz-DJGBFtuw-BH+xdg7gNf5FoOsdIovM2DwhH4lAwcqJFsgb1LcF1y7QuuxB8PDKgBrR++X+6fltvZvvWMDd+fSBmFw9Xp1OcTxneBiGDQgEEoPA8CgoU43zE8TRTNN02Ak1ZxmG992PedsPTV8cNMBDfBsfRFGUZsPDEbA6RcIwQDDeR6IgKgkliaw6LcZt6KcQYa24XROAElA8C8EBWyQQoYAQFgtlsKjKJorwWCAA}{\ref{diodoarriba}}
+    		\item \href{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKGw1uJRE28I268Q2KFBYAnEP27ZCeKQJAAWMIVHYUrWfIFVtIDAhlzwogGoBDFgAcp+YScL2VakVSph4XlgCUKXHkUEAJQld1Ew6nCYBBYAcwVuF0TlDVFIFgB3AzQHeWk8sWyneX0C-Qzi51UU5IzVPkUhcpNuABM6ADMLAFcAGwAXBj66NtNo2FYgA}{\ref{b4}}  \\
+    		\begin{adjustwidth}{-100pt}{-20pt}
+    			\begin{lstlisting}
+    			$ 1 0.000005 10.20027730826997 50 5 50 5e-11
+    			370 592 272 672 272 3 0 0
+    			r 672 368 672 416 0 321
+    			368 720 368 752 368 1 0 Va
+    			p 608 368 608 416 3 0 0 10000000
+    			R 592 272 592 240 0 0 40 5 0 0 0.5
+    			g 672 416 672 432 0 0
+    			w 720 368 672 368 0
+    			w 608 368 672 368 0
+    			w 608 416 672 416 0
+    			162 672 272 672 368 2 default-led 1 0 0 0.01
+    			\end{lstlisting}
+    		\end{adjustwidth}
+    		\item 
+    		\href{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKADcQAWPK3TrniBScqorrSiSYCFtgxVuvPP0Ug+aqSwBOFQlTCd+CPUPySwlWYTy6qaGwmIpTNiFQBqAQxbQQAEQBLAHsAEyCASRC6TwAbFHdwISTnAEEAO1CgxLEAYU8AF0yk-RAAeQAHFIBbcoBRGKqAHQBnbBbOFoRGrQAlOhjPAE96pubCFpQWjBa8FuJu9yCY-M8AczoRlvHmsG6ezwCYzebZrRygms8tAqCtY9nmrub53rpmgObCu4aWtse9t4fL7HDo7AHvT63Y5-SavCHAn7NUFUeYtCyNFpMLpo+DwDHNGDEBAobDEvDYQiEFAGAyognQIkkjBgPDkvDWBB4Jz4sC4yBbHn41BC2CcUhgJyEAyUbBkUjjFowSDYnZ8-mK2CTCbq+mQdEaxCCglC-EifFa42KkVPHU6s1ohmkE1WjVPXYzDE87H4rGenF8v07BmQTgYYTMjCcbCcCVanmO1E8gMTQNoQO8tV4z3NFDQFXuk2W1Vql3FgNFjPlnWV3EsGO0FA2TDOBAYQhqayJQKZSLROIJeY7J6+st4oPwUPEAhgFBOSCNh0T0jk-CszgIKP++Agba7emTIOkYjwZiQbDssUoehMfm6t0l3UHtO69G65WKqBWpG3g+3v95z9jW-B0jy-f8kD3WY0RVX0tyzHNYDgIliEITgiBZbg2hAp04J-c1q0zeDczdIVAJrbdb3IuAyMzGi1VkeRbAEJiDH4bBNDkKgMGJZjuOcViNFEOteRAMM7DDUTOwpVx-GCMJe1ieIQEHV8RyoiZEMgMgMCnCVcGITcEPgUgdOICxeRIGdcJ3NENQPMAExPXlsGwXlOEIRheQNe8q01bUDVfJV3wJQDbzNHMwNdUL2kohNIvpCCPWgn19VHOBzU0okdMjPAZTkeNQNwlN-Nw5MEJIj9KNoqq1Tovk6traTRJ4+xROUFxshAdwACNtGa-jDH6jraEgBiUUG7hlMGgT2KE+tlJnIQJJQ3hOwgbt5KiRSB2S5o1IfXMxRM7gZ1QllyQ0o7SGwalCGZPAZzwaY0pssF9wNMVjDDEQXLZJxnqVHzcQNJ9-z1G1ELdaLgIioDwOh8KHNAuGosgr0UvzEsHWUENIDbYRHAMDAoMPHC0uKnMCMInViNsyrStEBmGoohmrBsAz+Fash21atwuoAYz6jnwEG4XWv0Sx5rEjsbDbGx3P4da5IiLb+2U3b9vLByJ2JqdLyO9lFzgMUuQMyh3LIPdyNevdhVJ484FPFy3I8m9vNKkH-JfCHDRCv8YpTFGEoR2Lkf94O0eSzFUvUjTjNbFCp05LBN2wulyIptMGaIvM6b9pmavqwvcWZuBhJRRampWrhUK7ZWFLVlTh1fdSgwT7jMIQL7hDAP4HPb5l4FJOASAea3dzsj6iTu4Qz3Pc9-vdtKwdBgKfeCtwv3C38wIA8PEbioPpHAJKhwxpMyocqVUOJxtGy788rwKsmM4ikrl+BjSKvzj-S8Z3-i7wHLgtZwCtlImGMCUDaKs+xKSbtHIGY4YBYAsOgM6655zEw1CghAFgSAxhlBZayE93q6k+jPH688uSYCXq3JUq9vYGg3iHQO4dj771Dk6I+AFI5nwQRfT+bcozwDJLOcGIZn7p3LBaLOH8c7f3-lRRR1UC6swAO4CDsCITRzFRoaNUJNSBuiWAaKMZNPixjTEmBcu2IxZIoAmKYvYix9i9FDSjM4FxjYHEaK8ezQarjHGqHPCoQQgT9FhO8XY7xbiLGTWFpNNxRjZ5MXFo4ixKSMlmDcWLbRYtsksCAA}{\ref{b5}}
+    		\item 
+    		\href{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKGwyoBY8qVPbOnEHyrYoUFgDcQ-UYTwy4w-uK61VUaAhYAnRbxXcDVKmEpT9ytVWKENK8ic3aADiGzY7I95-fz3GmDwwSwA5paeCrKWJiwA7j5ehkrekCxuHna2iVYBTkHBcPE52dHZaZGWpUqEQrHs1iDZCIJNdmKx0CAAIgCWAPYAJv0AkoN0AIYANigAauDCiyggAIIAdkP9C04AwhMALpuLpiAA8i4rALYuAKJTlwA6AM7Yz5zPCA86AEp0UxMATzujyeYGehGeGGeeGexC+s36U32E1CdGBzxQ4K+3wmvSm6KeMJ0O361wmOgO-R0BJhT0+TzhPzoT16T0O1Puz1edOxzNZ7IJ71BvJZbKpBO5mKZooFnKeQpsD2eZiVTyYn2VhUgqpgpFIJDICGYCCI8h10D1xDwpAwnAwZhQKA1oMKWOV5sxyotpHgzEgHkgxGwtkYQXNkGdBWC4c9TzQ4ZVzxgiB1SdTb21GPTT0zOa0aYL8tzYG9cMLuZg9LB0KVqsTqvVtc1rtroNLxAQeoQeDAGE7kChrZLeqbLujWdb8aHWvHqpQ+fdre1ObrM8LUejK+brq3Y8KLE4QQoYGWJ4UJoUYEIJz6mzGkxm8zhoPpjb38A+7Ywev9ZGYz4hd8qEAsE80xNsfzgP0AyDEMmGXZMqy1JNYHA+M80gFUMIjJMoDTIssxXIjKzwoj+C9EdiJQpBQJhZVnUbbcPwxWA4FsSAUDwHtOEIBBu1jYdSFXTdYynICWzjfNhVw5cN3gUi5KUWSZwUmcDyPI1lkwZYEAwdpICECBb2Ge9pjmJp6OeN9FJYygIwQa9bTAbALywWzEEga8OydK1BCY4D3TAlCDJtThSCCBBsB7K0+2CpCd2TNCENgLDkxw0FSOXci43w5KkAQjMKKEqi8xomtLKsxNxIbThvQwLi+0EdhsB4ssIKE-yJzjYsZ2YySqx1VStSGwoRuCMb4GKFpDOIZZr0vWaJASebwEWlbymKda7F4rI7DSBJppyHacn2kBjsyM6HLaCQ9GO7IcF28Q7LYDgQAe673sqDolpySpokqU7Pv8f7-Aqfw7u2q7am2EBZgmFggA}{\ref{doblefuente}}
+    		\item 
+    		\href{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKGwyoBY8qVPbOnEHyrYoUFgDcQ-UYTwy4w-uK61VUaAhYAnRbxXcDVUXCn7laqsUIaV5E5u0AHENmy2Rbj2-luNYPBBLADmFh4KshYmLADu3p6GSl6QLK7utjYJlv6OgUFm8RkgWVFZqREWpUqEQjHsViW2CIJNuRLQIAAiAJYA9gAmfQCSA3QAhgA2KABq4MILKCAAggB2g33zjgDC4wAuGwtUEADyzssAts4AopMXADoAzthPnE8I9zoASnST4wCetwejzAT0ITwwTzwT2InxmfUme3GIToQKeKDBny+4x6kzRj2hOm2fSu4x0+z6Onx0MeH0esO+dEePUeBypdyeL1pWKZLLZ+LeIJ5zNZlPxXIxjJF-I5j0F1nuTzAHyeTBVIIKkEVjxgpFIJDICGYCCI8m1ur1eFIGE4GGVKBQ6vy8ExSvN0AxSugevgzEg7kgxGwNkYgXdkCdmvDnseaHDyvDEfNTy1Ke1-G1MdTOvddOz2YzXr1ybTKa0bqhiu1CarjzVVaVUdrYG9eoQbbwYAw7cgkObrdhzYKmYbsdT1c1QVHKHLFeTOcbUYXGqX2edU+X6-gLE4gQoYCWB4UJoUYEIx26-SGowm0zmsJBdPrK43CAHZB9-EdxAxj3BL5qN0dQ9ItSF9QJsDwWpKAwUMtWApMALgMtIF-OMEITBDEJMNM5Xg394MIrQoFwjMQQHXCiKQUECWrdV60XKd0VgOBiHbG18CgloXlAwckPRTM10nF1mLpUEUxIpClHgrdpMYoJJNk1JdyoQg+GEBBbHkBQUDwU9Lw2G8plmEolSfTDZNeAcjGNCJiDPKy2zgZh9Vqbt5NUoDUF48D-WwfIEDwOCULE1dYDQojIEwmBEAkwjXnwyiyyQeK8N4pLgOoyszO1BipMzFjIE4diEEC4hA2VN50o8gT0SE4TsxnMTzUUydWs1dqCk64J4haIQwB-EBz1PQbUniYbwEGibyjiIb8DaQhNLaVI9EWzJbBwdbxGdNgOBATa2gOyoxBiIofEqKJKjG-bzr8S6-AqPw1oWpbai2EAZnGWbnuwNAKFaX7Tv+oRAeBnJrueh0hGemagA}{\ref{doblefuente2}}
+    		\item 
+    		\href{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKGwyoBZDOQUVeCDIT4CQ2KFBYA3cdhEo8eOSLCLJXWhqjQELAE4huvNcuOjeVMHDaEzPC0bAKxVSGw4rw686fEaPLgd+XnNFZQk3FmgQABEASwB7ABNEgElkugBDABsUADVwPmKUEABBADsUxKK3EABhLIAXauKrEAB5AAcygFsugFEc3oAdAGdscc5xhBH9ACU6HKyATyHRsbBxwnGMcbxx4jn8xJymrIBzOnXxlG25+az4nJuxg-16xP6s-WbE-VeBzGszGRwWdDG8TGLQBw3Gk2BDwhUJhr2mmyRkOh-1eCLu4KxqLhY3RVCO4zAs3GTCpm3g8BG4xgpFIJDICGYCCIdkZY2ZLLwpAwnAwlP4tOs9PuFN5qF5YGgLPgzEg2FwxGwxEIjGsstgEvpcD1kDut0gxspxsgtPNfNlvM45tu9qZepBTrtUw9CpZLs9fN0Mv2jPlVN5NJDFMNTvlipZCHjeDAGATkD2Ic2cfJ8sNvNNeZjUejDIzKEDQft-sluarxddRZr3uLLE41gonF42DQFEIVHkyggCWqGWyeUKR02IIjdJrCvgvc4CcoIoEZApsDghAEvdFmspaYbcBAOwxAbumaVcBVaslCDwOttMGth6NAZNZqZsEtb+ffKgrpJW1z0fT8kBAwD119O1oJgJAtjeUNw0tF8PTLK80GIMBiDgYgO1ICUsxzKUxlNEim2LI1bkDDEmX-GdDTo6t6UY4sWOjFgAHcvDVEQeL4JQpC48xsDwTt5HEUTBO4yS+L49xDDCAThMkzR3C4oReMk5TLE4ihhH45QNMcdwgA}{\ref{b8}}
+    		\item 
+    		\href{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKGwyoBZDOQUVeCDIT4CQ2KFBYA3cdhEo8eOSLCLJXWhqjQELAE4huvNcuOjeVbGjaEzPC0bAKxVSGw4rw686fEaPLgd+XnNFZQk3FmcUI2ClON5seT4QABM6ADMAQwBXABsAFwZ8ujTwbRhIVmgQABEASwB7NKaASQzs-JQANQrYgZAAQQA7FqaKtxAAYWzC8dSqCAB5AAchgFtVgFF8jYAdAGdsI84jhH39ACU6fOyAT12Dw7AjwiOMI7wj4kuepqK2QA5nQnkcUG9Lldsg18mDDt99NMmltsvo5k19PDvocLodftc6IcGod5li9kcTrioUSSWT4WcXjTiaTMfCqRDCSz6RTDoyqL8jmALkcmCKXvB4PsjjBSKQSGQEMwEEQ7NLDrK5XhSBhOBhhfxxWBJZBIUL1ah1WBoHL4MxIMlIMRsMRCIxjRbYEaTaaZbAIeDfRrYMLPYgLTKI6cgwGNVHg3ig0HOEHrXL40ndOavtKrSL1WLc0KfUWXja5QgK3gwBhK5BPrmy+nG8bJeqA+3fVafW3Gygs9mI3HiyXhxLR6me5GRyaWJxjRROLwUAgRKurJATPVmq0OnQur0QL8XnjC+O28HtSgXcRq-aEEu8J9L8QBDXCJXjc4OMfW-AQO8TLBhCwabjqlDwJwOrClSVR4n+UqgSBaB+tUiawJA8FQJGfKmocIF4YRujYXGuFCuWx6EX6SCvAieYFqGM5SuRGB4Hq8r8CgxrarWVoUd2F6xihTEluCWZMjKJEIf+eHSXAUk9gpPosAA7okXjJCImlSGp2l6Sk4Q6RQwjiGgxlaSk7hqUIFkiOY2nuEAA}{\ref{b9}}
+    		\item 
+    		\href{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKGwyoBZDOQUVeCDIT4CQ2KFBYA3cdhEo8eOSLCLJXWhqjQELAE4huvNcuOjeVXJDaEzPC0bAKxVG+yvzw686fEa2DiMHfl5zRWUJNxZnFGDeCPiVPhAAEzoAMwBDAFcAGwAXBjy6VPBtGEhWaBAAEQBLAHtUxoBJdKy8lAA1crj+kABBADtmxvK3EABhLIKxlKoIAHkAB0GAWxWAUTz1gB0AZ2xDzkOEPf0AJTo8rIBPHf2DsEPCQ4xDvEPiC+7GwqyAHM6I9DihXhdLll6nlQQcvvopo1Nll9LNGvo4V8DucDj8rnQDvUDnNMbtDsccZDCcTSXDTs9qUSSRi4ZTwQTmXTyQcGVQfocwOdDkxhc94PA9ocYKRSCQyAhmAgiHYpQcZbK8KQMJwMEL+GKwBLIBDBWrUGqwNBZfBmJBsLhiNhiIRGEbzbBDcaTdLYOCwT71bAhR7EObpeGToH-erI0HcYHA5xA1bZXHE7ozZ8pZbhWrRTnBd7C89rbKEOW8GAMBXIB8c6W0w2jRK1f62z7Ld7Ww2UJms+HY0Xi0PxSOU92I8PjSxOEaKJxeNg0BRCFY7OUGmN2nROj0QD9nriC2PW6X4PxiHgsGB2CghZSrRfOFeqzhdQhsS34CA3oyg+CjakLaRoOi2n5uiaQaQLi36StBgFoL6VQJrAMHSlAEa8lBgFQXhuiYbG2GCmWh54b6SAvPCub5iG06SmCaGQJwFY1pwmCLrg9ZAQKp5wGCHZdt2-GMbB5qEXBP5QZJcASd2cneiwADuyQOiIal8EoUixEkGnmNgeAJGkmS5IUxSlBMGjBspumGapdk2CpGkGUuXgaY5FDCOIdn6Q5NlCAoWkBY4NhAA}{\ref{b10}}
+    		\clearpage
+    		\item \href{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKACURcAWcLn78GBRQRXWiKowELAE6dIPMH055FyqrkgswhYdlW8eXbMKU9hAEzoAzAIYBXADYAXBo7oXwEqLFYBnEC5CNSNg8AxCEQg7Rz86FgCEFDxDCmTwyKpo21j4gHNAsJQUUPMxCVlCxQiqkGKeLJYAd0CTVKCQqEqklLAanrqSqObaszTe9RGOwZ4B+q6WjDRwQioMJJXJFgL14RQESN26pYqAo-nzg6iQGLiEkCOdNY2wYmEsm5y7nWFCE6eHssAZYbA4XG4PF5JD5IKw5Ag3psQH9TKsRJp2BREQCEaZ0tDykhoVIRucho9EVogA}{\ref{b11}} \\
+    		\begin{adjustwidth}{-100pt}{-20pt}
+    			\begin{lstlisting}
+    				$ 1 0.000005 10.20027730826997 50 5 50 5e-11
+    				R 304 144 304 112 0 0 40 5 0 0 0.5
+    				r 304 144 384 144 0 300
+    				162 384 144 432 144 2 default-led 1 0 0 0.01
+    				s 464 144 464 176 0 1 false
+    				s 528 144 528 176 0 1 false
+    				g 464 224 464 240 0 0
+    				r 464 176 464 224 0 1
+    				w 432 144 464 144 0
+    				r 528 176 528 224 0 1
+    				w 464 144 528 144 0
+    				w 464 224 528 224 0
+    				w 720 160 752 160 0
+    				g 752 256 752 272 0 0
+    				s 752 224 752 256 0 1 false
+    				s 752 160 752 192 0 1 false
+    				162 672 160 720 160 2 default-led 1 0 0 0.01
+    				r 592 160 672 160 0 300
+    				R 592 160 592 128 0 0 40 5 0 0 0.5
+    				w 752 224 752 192 0
+    			\end{lstlisting}
+    		\end{adjustwidth}
+    	\end{itemize}
 \end{document}

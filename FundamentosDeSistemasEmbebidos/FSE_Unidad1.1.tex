@@ -43,6 +43,9 @@
 \usepackage{tikz-timing}
 \usepackage{url}
 \usepackage{tabularx}
+\usepackage{geometry}
+\usepackage{changepage}
+\usepackage[implicit=false]{hyperref}
 
 \definecolor{headergray}{RGB}{220,220,220}
 
@@ -258,6 +261,7 @@
 	Los siguientes ejercicios se resuelven aplicando la ley de Ohm. Note que solo hay tres elementos... Fuente, Resistencia y Conductores (cables).
 \end{tcolorbox}
 	\item 
+	\label{simple}
 	Para el circuito del punto \ref{aohm}, calcule la corriente (utilizando la unidad correcta) que circula por la resistencia en los siguientes casos. \\
 	% \begin{table}[h]
 	 	%\centering
@@ -343,7 +347,7 @@
 \\
 
 	\begin{minipage}{.60\textwidth}
-	\item En base al circuito del punto anterior, se agregan dos voltímetros que miden la caída de tensión en cada resistencia. Complete los valores medidos por cada voltímetro dados los siguientes valores de resistencia. Simule este circuito con Tinkercad o Falstad.
+	\item En base al circuito del punto anterior, se agregan dos voltímetros que miden la caída de tensión en cada resistencia. Complete los valores medidos por cada voltímetro dados los siguientes valores de resistencia. Simule este circuito con Tinkercad o Falstad. \label{voltimetros}
 \end{minipage}
 	\begin{minipage}{.60\textwidth}
 	\begin{tikzpicture}
@@ -447,7 +451,7 @@
 \begin{minipage}{.40\textwidth}
 
 \item Dado el siguiente circuito, encuentre los valores que faltan en cada caso. Verificar los resultados en algún simulador. \textit{Nota: Recuerde que $i1$ es la corriente total que sale de la fuente, $i2$ es la corriente que circula por $R2$ y por ultimo $i3$ es la corriente que circula por la rama superior donde se encuentra en serie $R1$ y $R3$. Una vez resuelto cada renglón recomendamos relacionar la corriente que circula por cada rama con la resistencia total de cada rama.}
-
+\label{a16}
 \end{minipage}
 \begin{minipage}{.10\textwidth}
 \begin{tikzpicture}
@@ -492,7 +496,7 @@
 \begin{minipage}{.35\textwidth}
 	
 	\item Dado el siguiente circuito, encuentre los valores que faltan en cada caso. Verificar los resultados en algún simulador.\textit{ Nota: al igual que el punto anterior existen dos mallas, intente calcular la Resistencia equivalente total del circuito desde el punto de vista de la fuente.}\\
-	
+	\label{a17}
 \end{minipage}
 \begin{minipage}{.10\textwidth}
 \begin{tikzpicture}
@@ -550,7 +554,7 @@
 \begin{minipage}{.45\textwidth}
 	
 	\item Dado el siguiente circuito, encuentre los valores que faltan en cada caso. Verificar los resultados en algún simulador. \textit{Nota: al igual que el punto anterior existen dos mallas, intente calcular la Resistencia equivalente total del circuito desde el punto de vista de la fuente.}\\
-	
+	\label{a18}
 \end{minipage}
 \begin{minipage}{.10\textwidth}
 	\begin{tikzpicture}
@@ -602,7 +606,7 @@
 \begin{minipage}{.45\textwidth}
 	
 	\item Dado el siguiente circuito, encuentre los valores que faltan en cada caso. Verificar los resultados en algún simulador. \textit{Nota: recuerde el concepto de malla en la primera ley de Kirchhoff, en donde se recorre el circuito partiendo de un elemento y no se repite el paso por ningún punto.}\\
-	
+	\label{a19}
 \end{minipage}
 \begin{minipage}{.10\textwidth}
 \begin{tikzpicture}
@@ -655,7 +659,7 @@
 \begin{minipage}{.60\textwidth}
 	
 	\item Dado el siguiente circuito, encuentre los valores que faltan en cada caso. Verificar los resultados en algún simulador. \textit{Nota: recomendamos plantear las ecuaciones de Kirchhoff para mallas y nodos.}\\
-	
+	\label{a20}
 \end{minipage}
 \begin{minipage}{.10\textwidth}
 	\begin{tikzpicture}
@@ -698,7 +702,7 @@
 \begin{minipage}{.45\textwidth}
 	
 	\item Dado el siguiente circuito, encuentre los valores que faltan en cada caso. Verificar los resultados en algún simulador. \textit{Nota: Al tener mas de tres ecuaciones con mas de tres incógnitas, realice el planteo de las ecuaciones y luego utilice alguna calculadora que resuelva el sistema como https://matrixcalc.org/es/slu.html} \\
-	
+	\label{a21}
 \end{minipage}
 \begin{minipage}{.10\textwidth}
 	\begin{tikzpicture}
@@ -777,4 +781,247 @@
 \\
 \item En el circuito del punto \ref{pote} se busca que la tensión en $Va$ sea de \SI{75}{\volt}. Encuentre los valores correspondientes de $R1$ y $R2$.\textit{Nota: En este caso, \SI{75}{\volt} caen sobre $R2\mathbin{\|}R3$ y \SI{25}{\volt} sobre $R1$... recuerde que $75=3*25$ } 
     \end{enumerate}
+\clearpage
+\section*{Apéndice - Circuitos}
+	\begin{tcolorbox}[enhanced,attach boxed title to top center={yshift=-3mm,yshifttext=-1mm},
+		colback=black!5!white,colframe=white!75!black,colbacktitle=red!80!black,
+		title= Simulador Falstad , fonttitle=\bfseries,
+		boxed title style={size=small,colframe=white,colback=black} ]
+		En este apéndice dejamos los circuitos utilizados en los ejercicios de ejemplo para que puedan importarse en el simulador Falstad. Puede hacer click en cada referencia en el PDF o copiar y pegar el texto. A tal fin, vaya a la opción File > Import from Text, y copie y pegue el texto de cada ejercicio.
+	\end{tcolorbox}
+\begin{itemize}
+	\item \href{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKADcQ8xCQAWQ3p24hseQVSq8qYCVCjQELAE4hiKPCLGr1fAXNbYMVLj1GC1GsyLmQWAd20b+gk7vEtshDa6sYvmwQgqADVWIA}{\ref{simple}}  \\
+	\begin{adjustwidth}{-120pt}{-20pt}
+		\begin{lstlisting}
+		$ 1 0.000005 10.20027730826997 50 5 50 5e-11
+		v 816 464 816 384 0 0 40 10 0 0 0.5
+		r 928 384 928 464 0 1
+		370 816 384 928 384 3 0 0
+		w 928 464 816 464 0
+		368 816 384 768 384 1 0 V1
+	\end{lstlisting}
+	\end{adjustwidth}
+	\item \href{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKADcQ8xCQAWQ3p24hseQVSq8qYCVCjQELAE4hiKPCLGr1fAXIyLsGKlx6jBpkWhFzILAO7aN-C8JdQW2QhsvmQGb01BCCoANVYVNQ0-KKtZFEVHX2tY7Gs7Lw1iQioYtSDwOVCAQwdVHILUrTsUYRkMFDjkBt1xeUgI8DAERrTpbsapeMUVZh6+OC7x9yoDMrHBvXrF8XmBpuWmuwAPZDxojq60kUhBQRRBACU6AEcWXbxcEBRiLOYTiHPBAGEASyUAMYAV1+ABcAPYsIA}{\ref{a11}}  \\
+\begin{adjustwidth}{-120pt}{-20pt}
+	\begin{lstlisting}
+		$ 1 0.000005 10.20027730826997 50 5 50 5e-11
+		v 816 464 816 384 0 0 40 10 0 0 0.5
+		r 928 384 928 464 0 75
+		370 816 384 816 320 3 0 0
+		w 928 464 816 464 0
+		368 816 384 768 384 1 0 V1
+		r 928 384 928 320 0 25
+		w 816 320 928 320 0
+		368 960 384 992 384 1 0 Va
+		w 960 384 928 384 0
+		216 1072 320 1072 464 0 0.01
+		r 1152 320 1152 400 0 25
+		r 1152 400 1152 464 0 75
+		w 1152 464 1072 464 0
+		w 1152 320 1072 320 0
+		x 1088 301 1132 304 4 24 Req
+		x 830 298 911 301 4 24 Circuito
+	\end{lstlisting}
+\end{adjustwidth}
+	\item \href{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKADcQ8xCQAWQ3p24hseQVSq8qYOFDkwELAE4hiKPCLGr1fAXIyLsGKlx6jBpkWhHyWAd20b+F4c6gtshDZfMgMXzUEIKgA1VhU1DV9IqwkQFEUHH2sY7GtIFgAHVX9YnLMtbHlkeHgs-MCKtyK4mVK4ewq0qlT0xrICwVStDIcO3S6dNwygA}{\ref{voltimetros}}  \\
+\begin{adjustwidth}{-120pt}{-20pt}
+	\begin{lstlisting}
+		$ 1 0.000005 10.20027730826997 50 5 50 5e-11
+		v 816 464 816 384 0 0 40 100 0 0 0.5
+		r 928 384 928 464 0 75
+		370 816 384 816 320 3 0 0
+		w 928 464 816 464 0
+		368 816 384 768 384 1 0 V1
+		r 928 384 928 320 0 25
+		w 816 320 928 320 0
+		p 976 320 976 384 3 0 0 10000000
+		p 976 384 976 464 3 0 0 10000000
+		w 976 320 928 320 0
+		w 976 384 928 384 0
+		w 976 464 928 464 0
+	\end{lstlisting}
+\end{adjustwidth}
+\clearpage
+	\item \href{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKADcRCMUQAWPKlx684UMSORiqMBCwBOIPMUJ9RSlf2khcLbBkHdt2FRjy8jK7FN2E8nQyMEpzj8GIBqrBaZcCQP1S0wWT0qAOxjfzNA7WtQxWULBI1RK2kWAHd7HgiVIRjITKjzXOSkwqz1Pj8AzSgi2r98usKFZkgXQnN2kuiqYPlwYOEuoYQcvu1ClDAVMEhnbWj5xd5R6VhWLJXe7vnd+u39pb3xk8Oxkb2OvnWintvuhc7zQoAPfxwpqzwEEsgNCBFgBhACWcgAxgBXUEAFwA9iwPvMEHZsAgrO0cghAYsAEp0ACOLCAA}{\ref{paralelo}}  \\
+\begin{adjustwidth}{-120pt}{-20pt}
+	\begin{lstlisting}
+		$ 1 0.000005 10.20027730826997 50 5 50 5e-11
+		v 672 480 672 400 0 0 40 10 0 0 0.5
+		r 896 400 896 480 0 30
+		370 672 336 784 336 3 0 0
+		368 672 400 624 400 1 0 V1
+		r 784 480 784 400 0 15
+		370 784 336 784 400 3 0 0
+		370 896 336 896 400 3 0 0
+		w 672 336 672 400 0
+		w 784 336 896 336 0
+		w 896 480 784 480 0
+		w 784 480 672 480 0
+		r 1104 464 1104 384 0 15
+		r 1152 464 1152 384 0 30
+		216 1024 384 1024 464 0 0.01
+		w 1024 384 1104 384 0
+		w 1104 384 1152 384 0
+		w 1152 464 1104 464 0
+		w 1104 464 1024 464 0
+		x 773 303 854 306 4 24 Circuito
+		x 1058 353 1102 356 4 24 Req	
+	\end{lstlisting}
+\end{adjustwidth}
+	\item \href{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKADcQM0QAWPKrlWx4eUMTypgq0qNAQtsGAd2Gj+QkSGxjILAE4h1WzXn7HRVFPINGehNWbsXO1w2dUhihDc8oKlblROnt689lo6-lRePsgS5hHSCoR4gVrYhGm4ohBUAGoAhsmpggmEXAm5IHmsAO5ZGVmauvW24UYeLSFB4VLxwV19PTmQ8Z0s9UOVkAiZ45Mzc5pSs7xeUBPIqzzrpTuZXXu73HxJQA}{\ref{a16}} \\
+\begin{adjustwidth}{-120pt}{-20pt}
+	\begin{lstlisting}
+		$ 1 0.000005 10.20027730826997 50 5 50 5e-11
+		v 720 480 720 384 0 0 40 10 0 0 0.5
+		370 720 384 800 384 3 0 0
+		r 800 384 880 384 0 25
+		r 800 464 880 464 0 75
+		r 880 384 960 384 0 50
+		370 880 464 960 464 3 0 0
+		370 960 384 1040 384 3 0 0
+		368 880 336 880 304 1 0 Va
+		368 720 384 672 384 1 0 V1
+		w 880 336 880 384 0
+		w 800 464 800 384 0
+		w 960 464 1040 464 0
+		w 1040 464 1040 384 0
+		w 1040 384 1056 384 0
+		w 1056 384 1056 496 0
+		w 1056 496 720 496 0
+		w 720 496 720 480 0	
+	\end{lstlisting}
+\end{adjustwidth}
+\clearpage
+	\item \href{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKADcRCAWKrvK7lWx4uUMT2RiqMBC2wYqGBChDDR-ISNVSWAJxAbVWvPyOiqKWfsNduB07fMgle+5tHFC7sWDhyFzsogjgZwwXbYOvICEmqBKnGR0nKEeG5m6dhBEFQAagCGKWmCGQjECVo5ILms1g52nrx2VGCWRekhJrzYKlW5AEYsAO7xGUoqIZDDII0Zs5PTs3FkhBlTIytzGKt8yRvbwaYlu1AsQA}{\ref{a17}}  \\
+\begin{adjustwidth}{-120pt}{-20pt}
+	\begin{lstlisting}
+		$ 1 0.000005 10.20027730826997 50 5 50 5e-11
+		v 640 480 640 384 0 0 40 10 0 0 0.5
+		370 752 384 800 384 3 0 0
+		r 800 384 880 384 0 25
+		r 800 464 880 464 0 75
+		r 880 384 960 384 0 100
+		370 752 464 800 464 3 0 0
+		370 640 384 752 384 3 0 0
+		368 880 384 880 352 1 0 Va
+		368 640 384 592 384 1 0 V1
+		r 880 464 960 464 0 125
+		368 880 464 880 432 1 0 Vb
+		w 752 384 752 464 0
+		w 960 384 960 464 0
+		w 960 384 976 384 0
+		w 976 384 976 480 0
+		w 976 480 640 480 0	
+	\end{lstlisting}
+\end{adjustwidth}
+
+	\item \href{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKADcRCAWKr7FTjxDY8XKOKFpxVGAhYAnEBikixeOMNHi5ijAgF8BefiEPjiCkHnWaxxQlVXjCLbBirdHW5V7HZproR4VhpO6o764OIAagCGgcHWvlY22JEQVNEARuwpyeG20qZUAjJQ0HLYQSD2ybXC6TEAxrl49qYmxCjBZmVCYGUyFSwA7jXdHQL1vaM1DpNzyZCzbYQLxgYmy2N6mwKeC8tViSZmG6bcUZkAJixAA}{\ref{a18}} \\
+\begin{adjustwidth}{-120pt}{-20pt}
+	\begin{lstlisting}
+		$ 1 0.000005 10.20027730826997 50 5 50 5e-11
+		v 640 432 640 384 0 0 40 20 0 0 0.5
+		r 720 384 800 384 0 5
+		r 752 432 832 432 0 9
+		r 880 384 960 384 0 6
+		370 640 384 720 384 3 0 0
+		368 800 384 800 352 1 0 Va
+		368 880 384 880 352 1 0 Vb
+		v 880 384 800 384 0 0 40 2 0 0 0.5
+		368 960 384 960 352 1 0 Vc
+		v 896 432 928 432 0 0 40 10 0 0 0.5
+		w 928 432 960 432 0
+		w 960 432 960 384 0
+		w 896 432 832 432 0
+		w 752 432 640 432 0
+		368 832 432 832 464 1 0 Vd
+	\end{lstlisting}
+\end{adjustwidth}
+\clearpage
+	\item \href{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKADcRCAWKr7FTjxDY8XKOKG5xVGAhYAnEBjTDRIPHFViqYOYrwat6w127i52DFW5URY5bbXZpLbITzHHYg7YQCIVABqAIau7p4gpt4mxITg4oEARgpKKlHqmulUKKyWVBpeEXbCLnkZvGY+kWbOMiwA7qkV9irFkA1FasQoHm0dVendHlkdQ0ZjI40TZmN+Hu1TPRRLNsvzHatzgrz8UCxAA}{\ref{a19}}  \\
+\begin{adjustwidth}{-120pt}{-20pt}
+	\begin{lstlisting}
+		$ 1 0.000005 10.20027730826997 50 5 50 5e-11
+		v 640 432 640 384 0 0 40 30 0 0 0.5
+		r 720 384 800 384 0 15
+		r 880 384 880 464 0 5
+		370 640 384 720 384 3 0 0
+		368 880 384 880 352 1 0 Va
+		368 880 464 880 496 1 0 Vb
+		r 720 464 800 464 0 21
+		370 800 384 880 384 3 0 0
+		370 800 464 880 464 3 0 0
+		w 720 464 720 384 0
+		w 880 384 928 384 0
+		w 880 464 928 464 0
+		w 928 384 928 464 0
+		w 928 464 928 528 0
+		w 928 528 640 528 0
+		w 640 528 640 432 0
+	\end{lstlisting}
+\end{adjustwidth}
+	\item \href{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKADcRCMUQAWQ3p258whKON5UwVGVGgIWAJxDcq2PIIyE8IdYKq8lK7bo3GdvXjqooW2DFS489KtKcHZxkOya06XfrrYYhBUAGoAhkaBLnii7uK29lR4AglxYi6eMnYO5nxW+bzEmV7sIKmC-IKVImKyktSyMAoA7kI8vPFOCd7ttV1itS59RSUdfOOjPcViM2mjgbMVacujA+MDCyxAA}{\ref{a20}}  \\
+\begin{adjustwidth}{-120pt}{-20pt}
+	\begin{lstlisting}
+		$ 1 0.000005 10.20027730826997 50 5 50 5e-11
+		v 672 464 672 416 0 0 40 10 0 0 0.5
+		r 720 384 768 384 0 4
+		r 768 384 768 448 0 2
+		370 672 384 720 384 3 0 0
+		368 768 384 768 336 1 0 Va
+		r 768 384 816 384 0 2
+		370 864 384 816 384 3 0 0
+		370 768 448 768 496 3 0 0
+		v 864 464 864 416 0 0 40 5 0 0 0.5
+		w 672 416 672 384 0
+		w 864 416 864 384 0
+		w 768 496 672 496 0
+		w 672 496 672 464 0
+		w 768 496 864 496 0
+		w 864 496 864 464 0
+	\end{lstlisting}
+\end{adjustwidth}
+\clearpage
+	\item \href{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKADcKAWTkTsQrj2yE8UMZyoSxVGAhYAnEIQQDhojJCEixKBSA09u6zRTAox2Ftg1L8INUpX3t2aVe0HnxoWnBiAagCGesoCCGb6JuHmklY2hHbRjmERrjJxtNym5ghZfKpuAO6CXraiDpAsxQmiSTWlldZUng6eRvZuTfoIORF4cNkd6YqeSRg9g7R6LR4TFbwZ3eYO-VQOaVBVIKuDOxVbe9p4-A0HJysnuTyVxcdhWVclNyWPrxGVQA}{\ref{a21}} \\
+\begin{adjustwidth}{-120pt}{-20pt}
+	\begin{lstlisting}
+		$ 1 0.000005 10.20027730826997 50 5 50 5e-11
+		v 544 416 544 368 0 0 40 40 0 0 0.5
+		r 656 368 704 368 0 2
+		r 704 448 704 512 0 3
+		370 608 368 656 368 3 0 0
+		368 704 368 704 320 1 0 Va
+		r 656 512 704 512 0 4
+		370 608 512 656 512 3 0 0
+		370 544 512 544 416 3 0 0
+		w 544 368 608 368 0
+		w 608 512 608 368 0
+		370 704 368 704 448 3 0 0
+		370 752 512 800 512 3 0 0
+		r 704 512 752 512 0 5
+		r 704 368 752 368 0 4
+		370 752 368 800 368 3 0 0
+		w 800 512 800 368 0
+		w 800 368 816 368 0
+		w 816 368 816 544 0
+		w 816 544 544 544 0
+		w 544 544 544 512 0
+	\end{lstlisting}
+\end{adjustwidth}
+	\item \href{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKADcKAWTkT7FLj2zZCUMZypg4YqjAQsReEIQwDseHirUjwYgGoBDFgCdlqkOs3m+AyZBYB3MwJvL8vflEdulrhNw9bb38hHUJ3YVF7U3ClSJ8LDTFiEwTLBNcqYlYnWMSrNST7IA}{\ref{pote}} \\
+\begin{adjustwidth}{-120pt}{-20pt}
+	\begin{lstlisting}
+		$ 1 0.000005 10.20027730826997 50 5 50 5e-11
+		v 544 432 544 336 0 0 40 100 0 0 0.5
+		368 672 384 672 336 1 0 Va
+		r 672 384 672 432 0 10
+		w 672 432 608 432 0
+		w 608 432 544 432 0
+		w 544 336 608 336 0
+		r 608 336 608 384 0 9
+		r 608 384 608 432 0 91
+		w 608 384 672 384 0
+		
+	\end{lstlisting}
+\end{adjustwidth}
+\end{itemize}
 \end{document}

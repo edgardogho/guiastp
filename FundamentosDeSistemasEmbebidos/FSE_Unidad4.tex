@@ -1372,7 +1372,7 @@
 }
 	\item Modifique el circuito anterior agregando un MUX que seleccione el valor de incremento entre cero y otro valor. La señal de selección de este MUX se genera detectando si el valor acumulado es cero, en cuyo caso el valor de incremento es cero. De esta forma el acumulador mantiene su valor cuando llega a cero, y solo puede volver a acumular cuando ingresa por la entrada un valor distinto de cero.
 	
-	\item Teniendo en cuenta los últimos circuitos diseñe un multiplicador por sumas sucesivas. Ej: Si se desea multiplicar 3x4 se realiza 3+3+3+3. Va a utilizar un acumulador para la suma sucesivas y otro que decrementa hasta cero y controla los valores de realimentación. 
+	\item Teniendo en cuenta los últimos circuitos diseñe un multiplicador por sumas sucesivas. Ej: Si se desea multiplicar 3x4 se realiza 3+3+3+3. Va a utilizar un acumulador para la suma sucesivas y otro que decrementa hasta cero y controla los valores de realimentación. \textit{Nota: la idea del ejercicio es utilizar lo visto de secuenciales y combinacionales para resolver este problema más complejo. Haga las modificaciones que crea necesarias para resolver el problema. Recomendamos seguir con otros ejercicios y volver a este luego de completar la guía. }
 	\item Implemente un registro ParaleloSerie. Este registro posee una entrada de datos de 8 bits y una señal de Latch de un bit. Cuando Latch=1 entonces el valor de paralelo se almacena en el registro con el siguiente flanco de clock. Si Latch=0 entonces cada flanco de clock desplaza a derecha el valor almacenado en el registro que sale por la salida Serie. Luego implemente un circuito SerieParalelo. \\
 	\resizebox{!}{7cm} {
 		\begin{tikzpicture}[x=1pt,y=-1pt,line cap=rect]
