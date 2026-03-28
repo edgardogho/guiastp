@@ -5,7 +5,7 @@
 \usepackage[a4paper, total={6in, 8in}, margin=2cm]{geometry}
 \usepackage{lipsum}
 \usepackage{fancyhdr}
-\usepackage{lastpage}
+%\usepackage{lastpage}
 \setlength{\headheight}{48.2pt}
 \usepackage{boxedminipage}
 \usepackage{graphicx}
@@ -16,7 +16,7 @@
 \usepackage{subfig}
 \usepackage{circuitikz}
 \usetikzlibrary{arrows}
-\usepackage[T1]{fontenc}
+%\usepackage[T1]{fontenc}
 \usepackage{tgbonum}
 \usepackage[most]{tcolorbox}
 \usepackage{textgreek}
@@ -27,27 +27,26 @@
 \usepackage{siunitx}
 \sisetup{output-decimal-marker = {,}} %para que use coma en vez de punto
 \usepackage[usestackEOL]{stackengine}
-\graphicspath{ {./imagenes/} }
+%\graphicspath{ {./imagenes/} }
 \pagestyle{fancy}
 \usepackage{enumitem}
 \usepackage[most]{tcolorbox}
 \usepackage[option ]{askmaps}
-\usepackage{circuitikz}
 \usepackage{float}
 \usepackage{adjustbox}
 \usepackage{amsmath}
 \usepackage{array}
 \usepackage{multirow}
-\usepackage{geometry}
+%\usepackage{geometry}
 \usepackage{booktabs}
 \usepackage{tikz-timing}
-\usepackage{url}
+%\usepackage{url}
 \usepackage{fancyvrb}
 \usepackage{fvextra}
 \usepackage[implicit=false]{hyperref}
 
 \definecolor{headergray}{RGB}{220,220,220}
-\usepackage{geometry}
+%\usepackage{geometry}
 \usepackage{changepage}
 \usepackage{listings}
 \lstset{
@@ -62,7 +61,7 @@
 \newcommand{\Titulo}{Trabajo Práctico 1.2-1.3}
 \newcommand{\Subtitulo}{Semiconductores y tecnología }
 \newcommand{\SubtituloDos}{de circuitos integrados}
-\newcommand{\Version}{Versión 261C.02}
+\newcommand{\Version}{Versión 261C.03}
 \newcommand{\Carrera}{INGENIERÍA EN INFORMÁTICA}
 \newcommand{\Asignatura}{3631 - Fundamentos de sistemas embebidos}
 \newcommand{\Tema}{Semiconductores y tecnología de circuitos integrados}
@@ -74,7 +73,7 @@
 
 
 \fancyhead[L]{\framebox(128,64){\includegraphics[scale=0.18]{diit}}}
-\fancyhead[C]{\framebox(224,64){\Longstack{\textbf{\Titulo}\\\textbf{\Subtitulo}\\\textbf{\SubtituloDos}\\Pág. \thepage\ de \pageref{LastPage}}}}
+\fancyhead[C]{\framebox(224,64){\Longstack{\textbf{\Titulo}\\\textbf{\Subtitulo}\\\textbf{\SubtituloDos}\\Pág. \thepage\ de \pageref{ultimaPagina}}}}
 \fancyhead[R]{\framebox(128,64){\includegraphics[scale=0.055]{logo}}}
 \renewcommand{\headrulewidth}{0.0pt}
 \renewcommand{\footrulewidth}{0pt}
@@ -1130,7 +1129,7 @@
 		\item  Calcule los márgenes de ruido para las siguientes familias de compuertas. Luego indique
 		los márgenes de ruido para la interconexión entre las distintas familias, ej: Salida TTL5 Entrada
 		ARD, Salida ARD Entrada TTL5, y así todas las combinaciones posibles. Se brindan ciertos
-		valores de resultado como ejemplo. \\
+		valores de resultado como ejemplo. \textit{Nota: CMOS3 se alimenta con $\SI{3,3}{\volt}$, el resto $\SI{5}{\volt}$} \\
 		\begin{tabular}{|c|c|c|c|c|}
 			\hline
 			\rowcolor{headergray}
@@ -1142,9 +1141,10 @@
 		\end{tabular} \\
 		Respuestas (algunas):
 		\begin{itemize}
-			\item	Salida TTL5 Entrada TTL5, Vnh = 0,7V; Vnl=0,4V; Margen de ruido=0,4V.
+			\item	Salida TTL5 Entrada TTL5, Vnh=0,7V; Vnl=0,4V; Margen de ruido=0,4V. \href{https://mfcatgrep.github.io/margenesderuido/?VOHMax=5&VOHMin=2.7&VOLMax=0.4&VOLMin=0&VIHMax=5&VIHMin=2.0&VILMax=0.8&VILMin=0}{Ver}
 			\item	Salida ARD Entrada TTL5, Vhn=2,2V; Vnl=Invalido; No es compatible.
-			\item	Salida CMOS3 Entrada TTL5, Vhn=0,4V; Vnl=0,3V, Margen de ruido=0,3V.
+			\href{https://mfcatgrep.github.io/margenesderuido/?VOHMax=5&VOHMin=4.2&VOLMax=0.9&VOLMin=0&VIHMax=5&VIHMin=2&VILMax=0.8&VILMin=0}{Ver}
+			\item	Salida CMOS3 Entrada TTL5, Vhn=0,4V; Vnl=0,3V, Margen de ruido=0,3V.\href{https://mfcatgrep.github.io/margenesderuido/?VOHMax=3&VOHMin=2.4&VOLMax=0.5&VOLMin=0&VIHMax=5&VIHMin=2&VILMax=0.8&VILMin=0}{Ver}
 			\item	Salida TTL5 Entrada CMOS3, Vhn=0,7V; Vnl=0,4V, Margen de ruido=0,4V. (compare con la respuesta anterior).
 			\item	Salida INV Entrada INV, Familia inválida.
 		\end{itemize}
@@ -1375,4 +1375,7 @@
 			\end{lstlisting}
 		\end{adjustwidth}
 	\end{itemize}
+	
+	
+	\label{ultimaPagina}
 \end{document}
