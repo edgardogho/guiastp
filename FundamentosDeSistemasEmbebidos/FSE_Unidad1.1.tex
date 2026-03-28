@@ -5,7 +5,7 @@
 \usepackage[a4paper, total={6in, 8in}, margin=2cm]{geometry}
 \usepackage{lipsum}
 \usepackage{fancyhdr}
-\usepackage{lastpage}
+%\usepackage{lastpage}
 \setlength{\headheight}{48.2pt}
 \usepackage{boxedminipage}
 \usepackage{graphicx}
@@ -53,7 +53,7 @@
 %%Modificar los siguientes valores segun la materia/tp
 \newcommand{\Titulo}{Trabajo Práctico 1.1}
 \newcommand{\Subtitulo}{Electricidad y circuitos en C.C.}
-\newcommand{\Version}{Versión 261C.01}
+\newcommand{\Version}{Versión 261C.02}
 \newcommand{\Carrera}{INGENIERÍA EN INFORMÁTICA}
 \newcommand{\Asignatura}{3631 - Fundamentos de sistemas embebidos}
 \newcommand{\Tema}{Electricidad y circuitos en C.C.}
@@ -65,7 +65,7 @@
 
 
 \fancyhead[L]{\framebox(128,64){\includegraphics[scale=0.18]{diit}}}
-\fancyhead[C]{\framebox(224,64){\Longstack{\textbf{\Titulo}\\\textbf{\Subtitulo}\\Pág. \thepage\ de \pageref{LastPage}}}}
+\fancyhead[C]{\framebox(224,64){\Longstack{\textbf{\Titulo}\\\textbf{\Subtitulo}\\Pág. \thepage\ de \pageref{ultimaPagina}}}}
 \fancyhead[R]{\framebox(128,64){\includegraphics[scale=0.055]{logo}}}
 \renewcommand{\headrulewidth}{0.0pt}
 \renewcommand{\footrulewidth}{0pt}
@@ -553,7 +553,7 @@
 \end{tcolorbox}
 \begin{minipage}{.45\textwidth}
 	
-	\item Dado el siguiente circuito, encuentre los valores que faltan en cada caso. Verificar los resultados en algún simulador. \textit{Nota: al igual que el punto anterior existen dos mallas, intente calcular la Resistencia equivalente total del circuito desde el punto de vista de la fuente.}\\
+	\item Dado el siguiente circuito, encuentre los valores que faltan en cada caso. Verificar los resultados en algún simulador. \textit{Nota: En un circuito con mas de una fuente el lugar donde se toma la masa es importante, ya que una mala masa puede generar puntos con tensiones negativas.}\\
 	\label{a18}
 \end{minipage}
 \begin{minipage}{.10\textwidth}
@@ -1024,4 +1024,5 @@
 	\end{lstlisting}
 \end{adjustwidth}
 \end{itemize}
+\label{ultimaPagina}
 \end{document}
